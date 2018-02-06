@@ -1,0 +1,5 @@
+name: Raffle
+main: com.drawwdev.raffle.Main
+version: 1.0
+author: drawwdev
+loadbefore: [Vault, PermissionsEx]
