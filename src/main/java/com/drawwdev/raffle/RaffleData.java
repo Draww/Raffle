@@ -10,11 +10,12 @@ public class RaffleData<T> {
 
     }
 
-    public void set(Integer arg, T data){
+    public RaffleData set(Integer arg, T data){
         if (getDataList().containsKey(arg)){
             getDataList().remove(arg);
         }
         getDataList().put(arg, data);
+        return this;
     }
 
     public T get(Integer arg){

@@ -2,7 +2,10 @@ package com.drawwdev.raffle;
 
 import com.drawwdev.raffle.depend.EconomyDepend;
 import com.drawwdev.raffle.depend.PermissionsExDepend;
+import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -15,9 +18,9 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
-        new RaffleCommand(this);
         economyDepend = new EconomyDepend(this);
         permissionsExDepend = new PermissionsExDepend(this);
+        new RaffleCommand(this);
     }
 
     @Override

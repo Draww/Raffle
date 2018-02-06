@@ -8,10 +8,11 @@ public class OrganizedRaffle {
 
     private Main plugin;
 
-    private HashMap<RaffleType, RaffleRunnable> organizedRaffles = new HashMap<>();
+    private HashMap<RaffleType, RaffleRunnable> organizedRaffles;
 
     public OrganizedRaffle(Main plugin){
         this.plugin = plugin;
+        organizedRaffles = new HashMap<>();
     }
 
     public void create(RaffleType raffleType, RaffleRunnable raffleRunnable){
