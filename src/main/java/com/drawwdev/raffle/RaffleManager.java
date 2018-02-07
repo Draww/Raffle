@@ -25,50 +25,57 @@ public class RaffleManager {
     private BukkitTask task = null;
     static Integer taskTimer = 1;
 
-    private OrganizedRaffle organizedRaffle;
+    private RaffleStorage raffleStorage;
 
     public RaffleManager(Main plugin) {
         this.plugin = plugin;
-        setupOrganizedRaffle();
+        setRaffleStorage();
         reset();
     }
 
-    public void setupOrganizedRaffle() {
-        organizedRaffle = new OrganizedRaffle(plugin);
-        if (plugin.getEconomyDepend().dependent()){
-            organizedRaffle.create(RaffleType.MONEY, new RaffleRunnable() {
-                @Override
-                public void run(Player player, RaffleData raffleData) {
-                    plugin.getEconomyDepend().get().depositPlayer(player, (Double) raffleData.get(0));
-                    Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a$" + (Double) raffleData.get(0) + " &7was given"));
-                }
-            });
-            organizedRaffle.create(RaffleType.EXP, new RaffleRunnable() {
-                @Override
-                public void run(Player player, RaffleData raffleData) {
-                    player.setExp(player.getExp() + (Float) raffleData.get(0));
-                    Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a" + (Float) raffleData.get(0) + " Exp &7was given"));
-                }
-            });
-            organizedRaffle.create(RaffleType.LEVEL, new RaffleRunnable() {
-                @Override
-                public void run(Player player, RaffleData raffleData) {
-                    player.setLevel(player.getLevel() + (Integer) raffleData.get(0));
-                    Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a" + (Integer) raffleData.get(0) + " Level &7was given"));
-                }
-            });
+    public void setRaffleStorage() {
+        raffleStorage = new RaffleStorage(plugin);
+        if (plugin.getEconomyDepend().dependent()) {
+            try {
+                raffleStorage.newBuilder(RaffleType.MONEY)
+                        .setConsumer(new RaffleConsumer() {
+                            @Override
+                            public void run(Player player, RaffleData raffleData) {
+                                Double money = Double.parseDouble(String.valueOf(raffleData.get(0)));
+                                plugin.getEconomyDepend().get().depositPlayer(player, money);
+                                Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a$" + money + " &7was given"));
+                            }
+                        })
+                        .setPredicate(new RafflePredicate() {
+                            @Override
+                            public boolean check(Player player, RaffleData raffleData) {
+                                if (raffleData.size() < 1) {
+                                    return false;
+                                }
+                                try {
+                                    Double parseDouble = Double.parseDouble(raffleData.get(0).toString());
+                                } catch (NumberFormatException error){
+                                    return false;
+                                }
+                                return true;
+                            }
+                        }).build();
+            } catch (RaffleException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void start(Player player, RaffleType raffleType, RaffleData raffleData, Integer time, String... nonGroup) throws RaffleException {
         if (getStatus()) throw new RaffleException(" &7There's a raffle going on!");
-        if (getOrganizedRaffle().get(raffleType) == null) throw new RaffleException(" &7This type is not identified.");
+        if (getRaffleStorage().getConsumer(raffleType) == null)
+            throw new RaffleException(" &7This type is not identified.");
         player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7Starting the raffle."));
         status = true;
         this.maker = player;
         this.time = time;
         this.raffleType = raffleType;
-        if (task != null && !task.isCancelled()){
+        if (task != null && !task.isCancelled()) {
             task.cancel();
             task = null;
         }
@@ -93,13 +100,13 @@ public class RaffleManager {
             taskTimer++;
             Integer countdown = (time + 1) - taskTimer;
 
-            if (countdown <= 0){
+            if (countdown <= 0) {
                 Player randomPlayer = ListUtil.getList(finalOrganizedPlayers);
                 Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &7Winner: &6&l" + randomPlayer.getName()));
                 task.cancel();
                 status = false;
                 task = null;
-                getOrganizedRaffle().get(raffleType).run(randomPlayer, raffleData);
+                getRaffleStorage().getConsumer(raffleType).run(randomPlayer, raffleData);
                 return;
             }
             Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &d&llast " + countdown + " seconds to determine the lucky one."));
@@ -112,11 +119,11 @@ public class RaffleManager {
         player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7The raffle stopped."));
     }
 
-    public void reset(){
+    public void reset() {
         this.status = false;
         this.maker = null;
         this.time = null;
-        if (task != null){
+        if (task != null) {
             task.cancel();
             task = null;
         }
@@ -124,7 +131,7 @@ public class RaffleManager {
         this.taskTimer = 1;
     }
 
-    public void reset(Boolean status, Player maker, Integer time, BukkitTask task, RaffleType raffleType, Integer taskTimer){
+    public void reset(Boolean status, Player maker, Integer time, BukkitTask task, RaffleType raffleType, Integer taskTimer) {
         this.status = status;
         this.maker = maker;
         this.time = time;
@@ -161,7 +168,7 @@ public class RaffleManager {
         return taskTimer;
     }
 
-    public OrganizedRaffle getOrganizedRaffle() {
-        return organizedRaffle;
+    public RaffleStorage getRaffleStorage() {
+        return raffleStorage;
     }
 }
