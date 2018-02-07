@@ -1,15 +1,20 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.utils.StringUtil;
+import org.bukkit.Bukkit;
+
 public class RaffleBuilder {
 
     private RaffleStorage raffle = null;
-    private RaffleType raffleType = null;
+    private String raffleName = null;
     private RaffleConsumer raffleConsumer = null;
     private RafflePredicate rafflePredicate = null;
+    private Integer time = null;
+    private String datatype = "";
 
-    public RaffleBuilder(RaffleStorage raffle, RaffleType raffleType){
+    public RaffleBuilder(RaffleStorage raffle, String raffleName){
         this.raffle = raffle;
-        this.raffleType = raffleType;
+        this.raffleName = raffleName;
     }
 
     public RaffleBuilder setRaffleMain(RaffleStorage raffleMain){
@@ -17,8 +22,8 @@ public class RaffleBuilder {
         return this;
     }
 
-    public RaffleBuilder setType(RaffleType raffleType){
-        this.raffleType = raffleType;
+    public RaffleBuilder setName(String raffleName){
+        this.raffleName = raffleName;
         return this;
     }
 
@@ -32,9 +37,19 @@ public class RaffleBuilder {
         return this;
     }
 
+    public RaffleBuilder setTime(Integer time){
+        this.time = time;
+        return this;
+    }
+
+    public RaffleBuilder setDatatype(String datatype) {
+        this.datatype = datatype;
+        return this;
+    }
+
     public void build() throws RaffleException{
-        if (raffle != null && raffleType != null && raffleConsumer != null && rafflePredicate != null){
-            raffle.create(raffleType, raffleConsumer, rafflePredicate);
+        if (raffle != null && raffleName != null && raffleConsumer != null && rafflePredicate != null && time != null){
+            raffle.create(raffleName, raffleConsumer, rafflePredicate, time, datatype);
         } else {
             throw new RaffleException("Missing data");
         }

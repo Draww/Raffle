@@ -2,6 +2,7 @@ package com.drawwdev.raffle;
 
 import com.drawwdev.raffle.utils.ListUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import ru.tehkode.permissions.PermissionUser;
@@ -17,10 +18,9 @@ public class RaffleManager {
 
     private Main plugin;
     private Boolean status = false;
-    private RaffleType raffleType = null;
+    private String raffleName = null;
 
     private Player maker = null;
-    private Integer time = null;
 
     private BukkitTask task = null;
     static Integer taskTimer = 1;
@@ -37,7 +37,9 @@ public class RaffleManager {
         raffleStorage = new RaffleStorage(plugin);
         if (plugin.getEconomyDepend().dependent()) {
             try {
-                raffleStorage.newBuilder(RaffleType.MONEY)
+                raffleStorage.newBuilder("LEVEL")
+                        .setTime(5)
+                        .setDatatype("Numeral")
                         .setConsumer(new RaffleConsumer() {
                             @Override
                             public void run(Player player, RaffleData raffleData) {
@@ -61,20 +63,19 @@ public class RaffleManager {
                             }
                         }).build();
             } catch (RaffleException e) {
-                e.printStackTrace();
+                Bukkit.getConsoleSender().sendMessage(e.getMessage());
             }
         }
     }
 
-    public void start(Player player, RaffleType raffleType, RaffleData raffleData, Integer time, String... nonGroup) throws RaffleException {
+    public void start(Player player, String raffleName, RaffleData raffleData, String... nonGroup) throws RaffleException {
         if (getStatus()) throw new RaffleException(" &7There's a raffle going on!");
-        if (getRaffleStorage().getConsumer(raffleType) == null)
+        if (getRaffleStorage().getConsumer(raffleName) == null)
             throw new RaffleException(" &7This type is not identified.");
         player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7Starting the raffle."));
         status = true;
         this.maker = player;
-        this.time = time;
-        this.raffleType = raffleType;
+        this.raffleName = raffleName;
         if (task != null && !task.isCancelled()) {
             task.cancel();
             task = null;
@@ -96,6 +97,7 @@ public class RaffleManager {
             organizedPlayers = new ArrayList<Player>(onlinePlayers);
         }
         List<Player> finalOrganizedPlayers = organizedPlayers;
+        Integer time = getRaffleStorage().getTime(raffleName);
         task = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             taskTimer++;
             Integer countdown = (time + 1) - taskTimer;
@@ -106,7 +108,7 @@ public class RaffleManager {
                 task.cancel();
                 status = false;
                 task = null;
-                getRaffleStorage().getConsumer(raffleType).run(randomPlayer, raffleData);
+                getRaffleStorage().getConsumer(raffleName).run(randomPlayer, raffleData);
                 return;
             }
             Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &d&llast " + countdown + " seconds to determine the lucky one."));
@@ -122,21 +124,19 @@ public class RaffleManager {
     public void reset() {
         this.status = false;
         this.maker = null;
-        this.time = null;
         if (task != null) {
             task.cancel();
             task = null;
         }
-        this.raffleType = null;
+        this.raffleName = null;
         this.taskTimer = 1;
     }
 
-    public void reset(Boolean status, Player maker, Integer time, BukkitTask task, RaffleType raffleType, Integer taskTimer) {
+    public void reset(Boolean status, Player maker, Integer time, BukkitTask task, String raffleName, Integer taskTimer) {
         this.status = status;
         this.maker = maker;
-        this.time = time;
         this.task = task;
-        this.raffleType = raffleType;
+        this.raffleName = raffleName;
         this.taskTimer = taskTimer;
     }
 
@@ -144,16 +144,12 @@ public class RaffleManager {
         return plugin;
     }
 
-    public RaffleType getRaffleType() {
-        return raffleType;
+    public String getRaffleName() {
+        return raffleName;
     }
 
     public Player getMaker() {
         return maker;
-    }
-
-    public Integer getTime() {
-        return time;
     }
 
     public Boolean getStatus() {

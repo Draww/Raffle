@@ -1,51 +1,66 @@
 package com.drawwdev.raffle;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
+import com.drawwdev.raffle.utils.StringUtil;
+import javafx.util.Pair;
+import org.bukkit.Bukkit;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RaffleStorage {
 
     private Main plugin;
 
-    private HashMap<RaffleType, Map.Entry<RaffleConsumer, RafflePredicate>> oraffle;
+    private HashMap<String, Raffle> oraffle;
 
     public RaffleStorage(Main plugin){
         this.plugin = plugin;
         oraffle = new HashMap<>();
     }
 
-    public RaffleConsumer getConsumer(RaffleType raffleType){
-        if (getOraffle().getOrDefault(raffleType, null) == null) return null;
-        return getOraffle().getOrDefault(raffleType, null).getKey();
+    public RaffleConsumer getConsumer(String raffleName){
+        if (getOraffle().getOrDefault(raffleName, null) == null) return null;
+        return getOraffle().getOrDefault(raffleName, null).getConsumer();
     }
 
-    public RafflePredicate getPredicate(RaffleType raffleType){
-        if (getOraffle().getOrDefault(raffleType, null) == null) return null;
-        return getOraffle().getOrDefault(raffleType, null).getValue();
+    public RafflePredicate getPredicate(String raffleName){
+        if (getOraffle().getOrDefault(raffleName, null) == null) return null;
+        return getOraffle().getOrDefault(raffleName, null).getPredicate();
     }
 
-    public void create(RaffleType raffleType, RaffleConsumer raffleConsumer, RafflePredicate rafflePredicate){
-        if (!getOraffle().containsKey(raffleType)){
-            getOraffle().put(raffleType, new AbstractMap.SimpleEntry<>(raffleConsumer, rafflePredicate));
+    public Integer getTime(String raffleName){
+        if (getOraffle().getOrDefault(raffleName, null) == null) return null;
+        return getOraffle().getOrDefault(raffleName, null).getTime();
+    }
+
+    public String getDatatype(String raffleName){
+        if (getOraffle().getOrDefault(raffleName, null) == null) return null;
+        return getOraffle().getOrDefault(raffleName, null).getDatatype();
+    }
+
+    public void create(String raffleName, RaffleConsumer raffleConsumer, RafflePredicate rafflePredicate, Integer time, String datatype){
+        if (!getOraffle().containsKey(raffleName)){
+            getOraffle().put(raffleName, new Raffle(time, raffleConsumer, rafflePredicate, datatype));
         }
     }
 
-    public RaffleBuilder newBuilder(RaffleType raffleType){
-        return new RaffleBuilder(this, raffleType);
+    public RaffleBuilder newBuilder(String raffleName){
+        return new RaffleBuilder(this, raffleName);
     }
 
-    public RaffleMultipleBuilder newBuilder(RaffleType... raffleType){
-        return new RaffleMultipleBuilder(this, raffleType);
+    public RaffleMultipleBuilder newBuilder(String... raffleName){
+        return new RaffleMultipleBuilder(this, raffleName);
     }
 
-
+    public List<String> getAllKey(){
+        return new ArrayList<>(getOraffle().keySet());
+    }
 
     public Main getPlugin() {
         return plugin;
     }
 
-    public HashMap<RaffleType, Map.Entry<RaffleConsumer, RafflePredicate>> getOraffle() {
+    public HashMap<String, Raffle> getOraffle() {
         return oraffle;
     }
 }

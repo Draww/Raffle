@@ -40,8 +40,8 @@ public class RaffleCommand implements CommandExecutor {
                 player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7Command was entered missing."));
                 return true;
             }
-            RaffleType raffleType = RaffleType.valueOf(args[1].toUpperCase());
-            Boolean typeExist = Arrays.stream(RaffleType.values()).anyMatch(p -> p.name().equals(args[1].toUpperCase()));
+            String rType = args[1].toUpperCase();
+            Boolean typeExist = Arrays.stream(getRaffleManager().getRaffleStorage().getAllKey().toArray(new String[0])).anyMatch(p -> p.equals(args[1].toUpperCase()));
             if (!typeExist){
                 player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7No such raffle type."));
                 return true;
@@ -50,14 +50,19 @@ public class RaffleCommand implements CommandExecutor {
                 player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7There's a raffle going on!"));
                 return true;
             }
-            if (getRaffleManager().getRaffleStorage().getConsumer(raffleType) == null && getRaffleManager().getRaffleStorage().getPredicate(raffleType) == null){
+            Raffle raffle = getRaffleManager().getRaffleStorage().getOraffle().get(rType);
+            if (raffle == null){
+                player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7This raffle is disabled!"));
+                return true;
+            }
+            if (raffle.getConsumer() == null && raffle.getPredicate() == null){
                 player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7This raffle is disabled!"));
                 return true;
             }
             RaffleData raffleData = new RaffleData().set(Arrays.asList(args).subList(2, Arrays.asList(args).size()));
-            if (getRaffleManager().getRaffleStorage().getPredicate(raffleType).check(player, raffleData)){
+            if (getRaffleManager().getRaffleStorage().getPredicate(rType).check(player, raffleData)){
                 try {
-                    getRaffleManager().start(player, RaffleType.valueOf(args[1].toUpperCase()), raffleData, 5);
+                    getRaffleManager().start(player, rType, raffleData);
                 } catch (RaffleException e) {
                     player.sendMessage(cc(plugin.getConfig().getString("prefix") + e.getMessage()));
                     return true;
@@ -78,10 +83,11 @@ public class RaffleCommand implements CommandExecutor {
             }
         } else if (args[0].equalsIgnoreCase("types")) {
             player.sendMessage(cc("&6o0=======&c[&eRaffle Types&c]&6========0o"));
-            RaffleType[] raffleTypes = RaffleType.values();
-            for (RaffleType r : raffleTypes){
+            String[] raffleTypes = getRaffleManager().getRaffleStorage().getAllKey().toArray(new String[0]);
+            for (String r : raffleTypes){
+                Raffle raffle = getRaffleManager().getRaffleStorage().getOraffle().get(r);
                 String state = getRaffleManager().getRaffleStorage().getConsumer(r) != null && getRaffleManager().getRaffleStorage().getPredicate(r) != null ? "&aON" : "&cOFF";
-                player.sendMessage(cc("&f- &b" + r + "&7(" + r.getData() + ") " + state));
+                player.sendMessage(cc("&f- &b" + r + "&7(" + raffle.getDatatype() + ") " + state));
             }
         } else if (args[0].equalsIgnoreCase("help")) {
             player.sendMessage(cc("&6o0=======&c[&eRaffle Help&c]&6========0o"));

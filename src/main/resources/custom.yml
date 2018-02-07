@@ -1,0 +1,8 @@
+example:
+  name: 'deneme'
+  datatype: 'Numeral'
+  time: 10
+  predicate:
+  - ''
+  actions:
+  - '[Broadcast] Deneme'
