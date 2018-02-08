@@ -362,41 +362,47 @@ public class ScriptSystem {
             out.writeUTF(action);
             player.sendPluginMessage((Plugin) this.plugin, "BungeeCord", out.toByteArray());
         } else if (action.contains("[addGroup]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[addGroup] ", "").replace("[addGroup]", ""));
-            String[] splitAction = action.split(" [World] ");
-            String[] groups = splitAction[0].split(", ");
-            PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
-            if (splitAction.length == 1) {
-                for (String g : groups) {
-                    permissionUser.addGroup(g);
-                }
-            } else if (splitAction.length == 2) {
-                for (String g : groups) {
-                    permissionUser.addGroup(g, splitAction[1]);
+            if (plugin.getPermissionsExDepend().dependent()){
+                action = StringUtil.setPlaceholders(player, action.replace("[addGroup] ", "").replace("[addGroup]", ""));
+                String[] splitAction = action.split(" [World] ");
+                String[] groups = splitAction[0].split(", ");
+                PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
+                if (splitAction.length == 1) {
+                    for (String g : groups) {
+                        permissionUser.addGroup(g);
+                    }
+                } else if (splitAction.length == 2) {
+                    for (String g : groups) {
+                        permissionUser.addGroup(g, splitAction[1]);
+                    }
                 }
             }
         } else if (action.contains("[setGroup]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[setGroup] ", "").replace("[setGroup]", ""));
-            String[] splitAction = action.split(" [World] ");
-            String[] groups = splitAction[0].split(", ");
-            PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
-            if (splitAction.length == 1) {
-                permissionUser.setGroups(groups);
-            } else if (splitAction.length == 2) {
-                permissionUser.setGroups(groups, splitAction[1]);
+            if (plugin.getPermissionsExDepend().dependent()){
+                action = StringUtil.setPlaceholders(player, action.replace("[setGroup] ", "").replace("[setGroup]", ""));
+                String[] splitAction = action.split(" [World] ");
+                String[] groups = splitAction[0].split(", ");
+                PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
+                if (splitAction.length == 1) {
+                    permissionUser.setGroups(groups);
+                } else if (splitAction.length == 2) {
+                    permissionUser.setGroups(groups, splitAction[1]);
+                }
             }
         } else if (action.contains("[removeGroup]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[removeGroup] ", "").replace("[removeGroup]", ""));
-            String[] splitAction = action.split(" [World] ");
-            String[] groups = splitAction[0].split(", ");
-            PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
-            if (splitAction.length == 1) {
-                for (String g : groups) {
-                    permissionUser.removeGroup(g);
-                }
-            } else if (splitAction.length == 2) {
-                for (String g : groups) {
-                    permissionUser.removeGroup(g, splitAction[1]);
+            if (plugin.getPermissionsExDepend().dependent()){
+                action = StringUtil.setPlaceholders(player, action.replace("[removeGroup] ", "").replace("[removeGroup]", ""));
+                String[] splitAction = action.split(" [World] ");
+                String[] groups = splitAction[0].split(", ");
+                PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
+                if (splitAction.length == 1) {
+                    for (String g : groups) {
+                        permissionUser.removeGroup(g);
+                    }
+                } else if (splitAction.length == 2) {
+                    for (String g : groups) {
+                        permissionUser.removeGroup(g, splitAction[1]);
+                    }
                 }
             }
         }

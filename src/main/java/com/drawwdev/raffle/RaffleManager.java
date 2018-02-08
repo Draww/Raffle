@@ -74,7 +74,7 @@ public class RaffleManager {
                 task.cancel();
                 status = false;
                 task = null;
-                getRaffleStorage().getConsumer(raffleName).run(randomPlayer, raffleData);
+                getRaffleStorage().getConsumer(raffleName).run(randomPlayer, raffleData, maker);
                 return;
             }
             Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &d&llast " + countdown + " seconds to determine the lucky one."));

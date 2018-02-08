@@ -12,13 +12,15 @@ public class CustomRaffle extends Raffle {
     private Config config;
     private List<String> actions = new ArrayList<>();
     private List<String> predicate = new ArrayList<>();
+    private String name;
 
     public CustomRaffle(String id) {
-        super(Main.getInstance().getConfigs().get("custom").getConfig().getInt(id + ".time"), null, null, Main.getInstance().getConfigs().get("custom").getConfig().getString(id + ".datatype", ""));
+        super(Main.getInstance().getConfigs().get("custom").getConfig().getInt(id + ".time"), null, null, Main.getInstance().getConfigs().get("custom").getConfig().getString(id + ".datatype", ""), RaffleType.CUSTOM);
         config = Main.getInstance().getConfigs().get("custom");
         actions = config.getConfig().getStringList(id + ".actions");
         predicate = config.getConfig().getStringList(id + ".predicate");
-        setConsumer((player, raffleData) -> Main.getInstance().getScriptSystem().executeActions(player, getActions()));
+        name = config.getConfig().getString(id + ".name");
+        setConsumer((player, raffleData, fromPlayer) -> Main.getInstance().getScriptSystem().executeActions(player, getActions()));
         setPredicate((player, raffleData) -> {
             Boolean r = false;
             for (String a : getPre()) {
@@ -42,5 +44,9 @@ public class CustomRaffle extends Raffle {
 
     public List<String> getPre() {
         return predicate;
+    }
+
+    public String getName() {
+        return name;
     }
 }

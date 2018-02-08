@@ -1,7 +1,10 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.depend.Depend;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class RaffleMultipleBuilder {
@@ -12,11 +15,15 @@ public class RaffleMultipleBuilder {
     private RafflePredicate rafflePredicate = null;
     private Integer time = null;
     private String datatype = "";
+    private RaffleType raffleType;
+    private HashMap<Class, Depend> depends = new HashMap<>();
 
     public RaffleMultipleBuilder(RaffleStorage raffle, String... raffleName){
         this.raffle = raffle;
         this.raffleNames = new ArrayList<>();
-        raffleNames.addAll(Arrays.asList(raffleName));
+        for (String rN : raffleName){
+            raffleNames.add(rN.toUpperCase());
+        }
     }
 
     public RaffleMultipleBuilder setRaffleMain(RaffleStorage raffleMain){
@@ -51,10 +58,36 @@ public class RaffleMultipleBuilder {
         return this;
     }
 
+    public RaffleMultipleBuilder setType(RaffleType raffleType) {
+        this.raffleType = raffleType;
+        return this;
+    }
+
+    public RaffleMultipleBuilder addDepend(Depend depend) {
+        if (!depends.containsKey(depend.getClass())){
+            this.depends.put(depend.getClass(), depend);
+        }
+        return this;
+    }
+
+    public RaffleMultipleBuilder removeDepend(Depend depend) {
+        if (depends.containsKey(depend.getClass())){
+            this.depends.remove(depend.getClass());
+        }
+        return this;
+    }
+
     public void build() throws RaffleException{
-        if (raffle != null && raffleNames != null && raffleConsumer != null && rafflePredicate != null && time != null){
+        if (raffle != null && raffleNames != null && raffleConsumer != null && rafflePredicate != null && time != null && raffleType != null){
+            if (!depends.isEmpty()) {
+                for (Depend depend : depends.values()) {
+                    if (!depend.dependent()){
+                        throw new RaffleException("depend " + depend.getClass().getName() + " is not installed!");
+                    }
+                }
+            }
             for (String rT : raffleNames){
-                raffle.create(rT, raffleConsumer, rafflePredicate, time, datatype);
+                raffle.create(rT, raffleConsumer, rafflePredicate, time, datatype, raffleType);
             }
         } else {
             throw new RaffleException("Missing data");

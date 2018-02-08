@@ -1,5 +1,6 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.depend.DependType;
 import com.drawwdev.raffle.depend.EconomyDepend;
 import com.drawwdev.raffle.depend.PermissionsExDepend;
 import com.drawwdev.raffle.nms.CompatabilityManager;
@@ -34,8 +35,8 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         configs = new Configs(this);
         loadConfigs();
-        economyDepend = new EconomyDepend(this);
-        permissionsExDepend = new PermissionsExDepend(this);
+        economyDepend = new EconomyDepend(this, DependType.NORMAL);
+        permissionsExDepend = new PermissionsExDepend(this, DependType.NORMAL);
         new RaffleCommand(this);
     }
 

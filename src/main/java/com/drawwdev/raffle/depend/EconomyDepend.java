@@ -11,15 +11,22 @@ public class EconomyDepend implements Depend {
     private Main plugin;
     private Economy econ;
     private Boolean dependent = false;
+    private DependType dependType;
 
-    public EconomyDepend(Main plugin) {
+    public EconomyDepend(Main plugin, DependType dependType) {
         this.plugin = plugin;
+        this.dependType = dependType;
         setup();
     }
 
     @Override
     public Economy get(){
         return econ;
+    }
+
+    @Override
+    public DependType dependType() {
+        return dependType;
     }
 
     @Override

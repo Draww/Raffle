@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea564c02-0433-406b-9de3-5e28310633ed" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_12_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_12_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bukkit_bukkit_1_12_2_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bukkit_bukkit_1_12_2_R0_1_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_12_2_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_12_2_R0_1_SNAPSHOT.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Main.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Raffle.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Raffle.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleBuilder.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleConsumer.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleConsumer.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleStorage.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleStorage.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java" afterPath="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" afterPath="$PROJECT_DIR$/target/classes/config.yml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,25 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RaffleManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="32" column="83" lean-forward="true" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4561#4562#0" expanded="true" />
-                <element signature="e#4597#4598#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RaffleLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="35" column="102" lean-forward="true" selection-start-line="35" selection-start-column="102" selection-end-line="35" selection-end-column="102" />
+            <state relative-caret-position="153">
+              <caret line="92" column="72" lean-forward="false" selection-start-line="92" selection-start-column="72" selection-end-line="92" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,26 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomRaffle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
-              <folding>
-                <element signature="e#1418#1419#0" expanded="true" />
-                <element signature="e#1448#1449#0" expanded="true" />
-                <element signature="e#1484#1485#0" expanded="true" />
-                <element signature="e#1516#1517#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+            <state relative-caret-position="136">
+              <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -79,8 +69,61 @@
       <file leaf-file-name="plugin.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="36" lean-forward="false" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+            <state relative-caret-position="34">
+              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScriptSystem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="214">
+              <caret line="191" column="55" lean-forward="true" selection-start-line="191" selection-start-column="55" selection-end-line="191" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringUtil.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/StringUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="79" column="58" lean-forward="true" selection-start-line="79" selection-start-column="58" selection-end-line="79" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RaffleCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="94" column="112" lean-forward="false" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
+              <folding>
+                <element signature="e#5470#5471#0" expanded="true" />
+                <element signature="e#5506#5507#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomRaffle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -123,19 +166,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/raffleException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Economy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ListUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/raffleRunnable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleRunnable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/OrganizedRaffle.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/IRaffle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ReplaceVariables.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/Logger.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/Config.java" />
@@ -145,20 +183,28 @@
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/InventoryUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/nms/CompatabilityManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/nms/Compatability_1_12_R1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java" />
         <option value="$PROJECT_DIR$/src/main/resources/custom.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/DependType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depends.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleConsumer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Raffle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleStorage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java" />
       </list>
     </option>
   </component>
@@ -282,15 +328,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="raffle" type="462c0819:PsiDirectoryNode" />
               <item name="depend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Raffle" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Raffle" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="raffle" type="462c0819:PsiDirectoryNode" />
-              <item name="nms" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Raffle" type="b2602c69:ProjectViewProjectNode" />
@@ -436,15 +473,16 @@
       <workItem from="1517934004448" duration="1201000" />
       <workItem from="1517986648627" duration="11610000" />
       <workItem from="1518019680065" duration="5362000" />
-      <workItem from="1518058240992" duration="1230000" />
+      <workItem from="1518058240992" duration="7742000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43529000" />
+    <option name="totallyTimeSpent" value="50041000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -454,7 +492,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32441473" sideWeight="0.5121029" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10363086" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2880259" sideWeight="0.48789713" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2880259" sideWeight="0.48789713" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -488,27 +526,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-20180203.065304-103.jar!/org/bukkit/command/ConsoleCommandSender.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-20180203.065304-103.jar!/org/bukkit/command/CommandExecutor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-20180203.065304-103.jar!/org/bukkit/scheduler/BukkitTask.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/net/milkbowl/vault/VaultAPI/1.6/VaultAPI-1.6.jar!/net/milkbowl/vault/economy/Economy.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -559,20 +576,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="67" column="22" lean-forward="false" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -580,13 +584,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -599,16 +597,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/configs/CustomConfig.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ReplaceVariables.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="84" column="5" lean-forward="false" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/GitHub/GOAPI/src/main/java/com/gevezeoyuncu/goapi/Utils/StringAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -616,20 +604,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/StringUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="79" column="58" lean-forward="true" selection-start-line="79" selection-start-column="58" selection-end-line="79" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/InventoryUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="94" column="5" lean-forward="false" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -651,6 +632,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1632">
           <caret line="107" column="34" lean-forward="false" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#489#490#0" expanded="false" />
+            <element signature="e#521#522#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -686,6 +672,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -707,67 +694,96 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/DependType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+        <state relative-caret-position="68">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/util/HashMap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="553" column="13" lean-forward="false" selection-start-line="553" selection-start-column="13" selection-end-line="553" selection-end-column="13" />
+        <state relative-caret-position="68">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleType.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/EconomyDepend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="12" column="33" lean-forward="true" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+        <state relative-caret-position="85">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <element signature="e#671#672#0" expanded="false" />
+            <element signature="e#704#705#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/PermissionsExDepend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding>
+            <element signature="e#695#696#0" expanded="false" />
+            <element signature="e#728#729#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/depend/Depends.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-627">
+          <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding>
+            <element signature="e#998#999#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-20180207.072952-105.jar!/org/bukkit/configuration/ConfigurationSection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="16" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-313">
-          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Raffle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-670">
-          <caret line="47" column="13" lean-forward="false" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-          <folding>
-            <element signature="e#4935#4936#0" expanded="false" />
-            <element signature="e#4971#4972#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="38" column="79" lean-forward="false" selection-start-line="38" selection-start-column="79" selection-end-line="38" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleConsumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+          <caret line="6" column="86" lean-forward="false" selection-start-line="6" selection-start-column="86" selection-end-line="6" selection-end-column="86" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
+        <state relative-caret-position="17">
           <caret line="18" column="41" lean-forward="false" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -779,82 +795,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333">
-          <caret line="26" column="60" lean-forward="false" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="47" column="27" lean-forward="false" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="36" lean-forward="false" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        <state relative-caret-position="1292">
+          <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="32" column="83" lean-forward="true" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4561#4562#0" expanded="true" />
-            <element signature="e#4597#4598#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="160" column="52" lean-forward="true" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="52" />
+        <state relative-caret-position="-442">
+          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleMultipleBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="35" column="102" lean-forward="true" selection-start-line="35" selection-start-column="102" selection-end-line="35" selection-end-column="102" />
+        <state relative-caret-position="381">
+          <caret line="87" column="13" lean-forward="true" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RafflePredicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="1053" column="13" lean-forward="false" selection-start-line="1053" selection-start-column="13" selection-end-line="1053" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/Raffle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-367">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78">
+          <caret line="42" column="75" lean-forward="true" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1855#1856#0" expanded="false" />
+            <element signature="e#1913#1914#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/CustomRaffle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+        <state relative-caret-position="301">
+          <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="94" column="112" lean-forward="false" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
           <folding>
-            <element signature="e#1418#1419#0" expanded="true" />
-            <element signature="e#1448#1449#0" expanded="true" />
-            <element signature="e#1484#1485#0" expanded="true" />
-            <element signature="e#1516#1517#0" expanded="true" />
+            <element signature="e#5470#5471#0" expanded="true" />
+            <element signature="e#5506#5507#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/RaffleLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="92" column="72" lean-forward="false" selection-start-line="92" selection-start-column="72" selection-end-line="92" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        <state relative-caret-position="136">
+          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/ScriptSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="191" column="55" lean-forward="true" selection-start-line="191" selection-start-column="55" selection-end-line="191" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drawwdev/raffle/utils/StringUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="79" column="58" lean-forward="true" selection-start-line="79" selection-start-column="58" selection-end-line="79" selection-end-column="58" />
           <folding />
         </state>
       </provider>

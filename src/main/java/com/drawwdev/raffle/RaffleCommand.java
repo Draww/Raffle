@@ -62,7 +62,11 @@ public class RaffleCommand implements CommandExecutor {
             RaffleData raffleData = new RaffleData().set(Arrays.asList(args).subList(2, Arrays.asList(args).size()));
             if (getRaffleManager().getRaffleStorage().getPredicate(rType).check(player, raffleData)){
                 try {
-                    getRaffleManager().start(player, rType, raffleData);
+                    if (!plugin.getConfig().getStringList("disabledGroup").isEmpty()) {
+                        getRaffleManager().start(player, rType, raffleData, plugin.getConfig().getStringList("disabledGroup").toArray(new String[0]));
+                    } else {
+                        getRaffleManager().start(player, rType, raffleData);
+                    }
                 } catch (RaffleException e) {
                     player.sendMessage(cc(plugin.getConfig().getString("prefix") + e.getMessage()));
                     return true;
@@ -87,7 +91,11 @@ public class RaffleCommand implements CommandExecutor {
             for (String r : raffleTypes){
                 Raffle raffle = getRaffleManager().getRaffleStorage().getOraffle().get(r);
                 String state = getRaffleManager().getRaffleStorage().getConsumer(r) != null && getRaffleManager().getRaffleStorage().getPredicate(r) != null ? "&aON" : "&cOFF";
-                player.sendMessage(cc("&f- &b" + r + "&7(" + raffle.getDatatype() + ") " + state));
+                if (raffle.getRaffleType().equals(RaffleType.CUSTOM)){
+                    player.sendMessage(cc("&f- &b" + r + "&7(" + raffle.getDatatype() + ") " + state + " &7|| &2CUSTOM"));
+                } else {
+                    player.sendMessage(cc("&f- &b" + r + "&7(" + raffle.getDatatype() + ") " + state));
+                }
             }
         } else if (args[0].equalsIgnoreCase("help")) {
             player.sendMessage(cc("&6o0=======&c[&eRaffle Help&c]&6========0o"));

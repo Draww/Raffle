@@ -8,6 +8,6 @@ import java.util.function.Predicate;
 @FunctionalInterface
 public interface RafflePredicate {
 
-    boolean check(Player player, RaffleData raffleData);
+    boolean check(Player fromPlayer, RaffleData raffleData);
 
 }

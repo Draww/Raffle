@@ -1,6 +1,6 @@
 name: Raffle
 main: com.drawwdev.raffle.Main
-version: 1.3.2
+version: 1.3.3
 author: drawwdev
 commands:
   raffle:

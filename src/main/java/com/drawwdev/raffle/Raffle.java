@@ -6,16 +6,18 @@ public class Raffle {
     private RaffleConsumer consumer;
     private RafflePredicate predicate;
     private String datatype;
+    private RaffleType raffleType;
 
     public Raffle(){
 
     }
 
-    public Raffle(Integer time, RaffleConsumer consumer, RafflePredicate predicate, String datatype){
+    public Raffle(Integer time, RaffleConsumer consumer, RafflePredicate predicate, String datatype, RaffleType raffleType){
         this.time = time;
         this.consumer = consumer;
         this.predicate = predicate;
         this.datatype = datatype;
+        this.raffleType = raffleType;
     }
 
     public Integer getTime() {
@@ -48,5 +50,13 @@ public class Raffle {
 
     public void setDatatype(String datatype) {
         this.datatype = datatype;
+    }
+
+    public RaffleType getRaffleType() {
+        return raffleType;
+    }
+
+    public void setRaffleType(RaffleType raffleType) {
+        this.raffleType = raffleType;
     }
 }

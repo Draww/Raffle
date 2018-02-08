@@ -1,7 +1,12 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.depend.Depend;
 import com.drawwdev.raffle.utils.StringUtil;
 import org.bukkit.Bukkit;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class RaffleBuilder {
 
@@ -11,10 +16,13 @@ public class RaffleBuilder {
     private RafflePredicate rafflePredicate = null;
     private Integer time = null;
     private String datatype = "";
+    private RaffleType raffleType;
+    private HashMap<Class, Depend> depends = new HashMap<>();
 
     public RaffleBuilder(RaffleStorage raffle, String raffleName){
         this.raffle = raffle;
-        this.raffleName = raffleName;
+        this.raffleName = raffleName.toUpperCase();
+        this.raffleType = RaffleType.NORMAL;
     }
 
     public RaffleBuilder setRaffleMain(RaffleStorage raffleMain){
@@ -47,9 +55,35 @@ public class RaffleBuilder {
         return this;
     }
 
+    public RaffleBuilder setType(RaffleType raffleType) {
+        this.raffleType = raffleType;
+        return this;
+    }
+
+    public RaffleBuilder addDepend(Depend depend) {
+        if (!depends.containsKey(depend.getClass())){
+            this.depends.put(depend.getClass(), depend);
+        }
+        return this;
+    }
+
+    public RaffleBuilder removeDepend(Depend depend) {
+        if (depends.containsKey(depend.getClass())){
+            this.depends.remove(depend.getClass());
+        }
+        return this;
+    }
+
     public void build() throws RaffleException{
-        if (raffle != null && raffleName != null && raffleConsumer != null && rafflePredicate != null && time != null){
-            raffle.create(raffleName, raffleConsumer, rafflePredicate, time, datatype);
+        if (raffle != null && raffleName != null && raffleConsumer != null && rafflePredicate != null && time != null && raffleType != null){
+            if (!depends.isEmpty()) {
+                for (Depend depend : depends.values()) {
+                    if (!depend.dependent()){
+                        throw new RaffleException("depend " + depend.getClass().getName() + " is not installed!");
+                    }
+                }
+            }
+            raffle.create(raffleName, raffleConsumer, rafflePredicate, time, datatype, raffleType);
         } else {
             throw new RaffleException("Missing data");
         }

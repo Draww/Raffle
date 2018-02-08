@@ -38,9 +38,14 @@ public class RaffleStorage {
         return getOraffle().getOrDefault(raffleName, null).getDatatype();
     }
 
-    public void create(String raffleName, RaffleConsumer raffleConsumer, RafflePredicate rafflePredicate, Integer time, String datatype){
+    public RaffleType getType(String raffleName){
+        if (getOraffle().getOrDefault(raffleName, null) == null) return null;
+        return getOraffle().getOrDefault(raffleName, null).getRaffleType();
+    }
+
+    public void create(String raffleName, RaffleConsumer raffleConsumer, RafflePredicate rafflePredicate, Integer time, String datatype, RaffleType raffleType){
         if (!getOraffle().containsKey(raffleName)){
-            getOraffle().put(raffleName, new Raffle(time, raffleConsumer, rafflePredicate, datatype));
+            getOraffle().put(raffleName, new Raffle(time, raffleConsumer, rafflePredicate, datatype, raffleType));
         }
     }
 
