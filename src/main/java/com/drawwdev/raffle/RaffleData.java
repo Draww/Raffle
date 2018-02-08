@@ -38,6 +38,16 @@ public class RaffleData<T> {
         return getDataList().getOrDefault(arg,null);
     }
 
+    public String getAllString(){
+        StringBuilder r = new StringBuilder();
+        for (T t : getDataList().values()){
+            if (t instanceof String){
+                r.append(t);
+            }
+        }
+        return r.toString();
+    }
+
     public HashMap<Integer, T> getDataList() {
         return dataList;
     }

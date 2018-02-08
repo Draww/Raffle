@@ -2,6 +2,7 @@ package com.drawwdev.raffle.utils;
 
 import com.drawwdev.raffle.Main;
 import com.drawwdev.raffle.Raffle;
+import com.drawwdev.raffle.RaffleData;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.*;
@@ -16,8 +17,11 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 public class ScriptSystem {
@@ -28,16 +32,16 @@ public class ScriptSystem {
         this.plugin = plugin;
     }
 
-    public void executeActions(Player player, List<String> actions) {
+    public void executeActions(Player player, List<String> actions, RaffleData raffleData) {
         if (actions == null || actions.isEmpty()) {
             return;
         }
         for (String action : actions) {
-            executeAction(player, action);
+            executeAction(player, action, raffleData);
         }
     }
 
-    private boolean executeAction(Player player, String action) {
+    private boolean executeAction(Player player, String action, RaffleData raffleData) {
         int delayTimer = 0;
         int chance = 100;
         if (action.contains("[Chance=")) {
@@ -92,14 +96,26 @@ public class ScriptSystem {
             }
         }
         if (delayTimer != 0) {
-            Bukkit.getScheduler().runTaskLater(this.plugin, () -> runAction(player, runAction), (long) delayTimer);
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> runAction(player, runAction, raffleData), (long) delayTimer);
         } else {
-            runAction(player, runAction);
+            runAction(player, runAction, raffleData);
         }
         return false;
     }
 
-    public Boolean runCondition(Player player, String action) {
+    public String replaceArgs(String toReplace, RaffleData raffleData) {
+        for (int i = raffleData.size(); i > 0; i--) {
+            if (toReplace.contains("$arg" + i)) {
+                toReplace = toReplace.replace("$arg" + i, (CharSequence) String.valueOf(raffleData.get(i-1)));
+            }
+        }
+        if ((toReplace.contains("$multiargs")) && (raffleData.size() > 1)) {
+            toReplace = toReplace.replace("$multiargs", raffleData.getAllString());
+        }
+        return toReplace;
+    }
+
+    public Boolean runCondition(Player player, String action, RaffleData raffleData) {
         int chance = 100;
         if (action.contains("[Chance=")) {
             for (int i = 1; i <= 100; ++i) {
@@ -111,7 +127,7 @@ public class ScriptSystem {
                         if (chanceCheck > chance) {
                             if (action.contains("[Action]")) {
                                 action.replace("[Action] ", "").replace("[Action]", "");
-                                executeAction(player, action);
+                                executeAction(player, action, raffleData);
                             }
                             return false;
                         }
@@ -127,14 +143,14 @@ public class ScriptSystem {
             if (item[2] != null) {
                 if (!InventoryUtils.containsAtLeast(player.getInventory(), Material.valueOf(item[0]), stackItem, Short.parseShort(item[2]))) {
                     if (splitAction[1] != null) {
-                        executeAction(player, splitAction[1]);
+                        executeAction(player, splitAction[1], raffleData);
                     }
                     return false;
                 }
             } else {
                 if (!InventoryUtils.containsAtLeast(player.getInventory(), Material.valueOf(item[0]), stackItem)) {
                     if (splitAction[1] != null) {
-                        executeAction(player, splitAction[1]);
+                        executeAction(player, splitAction[1], raffleData);
                     }
                     return false;
                 }
@@ -150,7 +166,7 @@ public class ScriptSystem {
             Double needMoney = Double.parseDouble(splitAction[0]);
             if (moneyPlayer < needMoney) {
                 if (splitAction[1] != null) {
-                    executeAction(player, splitAction[1]);
+                    executeAction(player, splitAction[1], raffleData);
                 }
                 return false;
             }
@@ -162,7 +178,7 @@ public class ScriptSystem {
             Integer needLevel = Integer.parseInt(splitAction[0]);
             if (levelPlayer < needLevel) {
                 if (splitAction[1] != null) {
-                    executeAction(player, splitAction[1]);
+                    executeAction(player, splitAction[1], raffleData);
                 }
                 return false;
             }
@@ -180,16 +196,176 @@ public class ScriptSystem {
                 }
                 if (!controlGroup) {
                     if (splitAction[1] != null) {
-                        executeAction(player, splitAction[1]);
+                        executeAction(player, splitAction[1], raffleData);
                     }
                 }
                 return controlGroup;
             }
         }
+        try {
+            if (action.contains("#Script#")) {
+                action = action.replace("#Script# ", "").replace("#Script#", "");
+                if (action.contains("[IF]")) {
+                    action = action.replace("[IF] ", "").replace("[IF]", "");
+                    action = replaceArgs(action, raffleData);
+                    action = StringUtil.setPlaceholders(player, action);
+
+                    ArrayList<String> ORstatments = new ArrayList<>();
+                    if (action.split("<or>").length > 1) {
+                        String[] arrayOfString;
+                        int j = (arrayOfString = action.split("<or>")).length;
+                        for (int i = 0; i < j; i++) {
+                            String s = arrayOfString[i];
+                            ORstatments.add(s);
+                        }
+                    } else {
+                        ORstatments.add(action);
+                    }
+                    for (String orString : ORstatments) {
+                        List<String> ANDstatments = new ArrayList<>();
+                        int AND_TRUE_RESULTS = 0;
+                        if (orString.split("<and>").length > 1) {
+                            String[] arrayOfString;
+                            int m = (arrayOfString = orString.split("<and>")).length;
+                            for (int k = 0; k < m; k++) {
+                                String s = arrayOfString[k];
+                                ANDstatments.add(s);
+                            }
+                        } else {
+                            ANDstatments.add(orString);
+                        }
+                        for (String st : ANDstatments) {
+                            if (st.contains("HasPermission==")) {
+                                String permission = st.split("HasPermission==")[1];
+                                if (player.hasPermission(permission)) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(".args.lenght>")) {
+                                String a = st.split(".args.lenght>")[0];
+                                int b = 0;
+                                try {
+                                    b = Integer.valueOf(st.split(".args.lenght>")[1]).intValue();
+                                } catch (Exception localException) {
+                                }
+                                if (a.split(" ").length > b) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(".string.lenght>")) {
+                                String a = st.split(".string.lenght>")[0];
+                                int b = 0;
+                                try {
+                                    b = Integer.valueOf(st.split(".string.lenght>")[1]).intValue();
+                                } catch (Exception localException1) {
+                                }
+                                if (a.length() > b) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains("<=")) {
+                                Double v1 = Double.valueOf(0.0D);
+                                Double v2 = Double.valueOf(0.0D);
+                                try {
+                                    v1 = Double.valueOf(st.split("<=")[0]);
+                                } catch (NumberFormatException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    v2 = Double.valueOf(st.split("<=")[1]);
+                                } catch (NumberFormatException e) {
+                                    e.printStackTrace();
+                                }
+                                if (v1.doubleValue() <= v2.doubleValue()) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(">=")) {
+                                Double v1 = Double.valueOf(0.0D);
+                                Double v2 = Double.valueOf(0.0D);
+                                try {
+                                    v1 = Double.valueOf(st.split(">=")[0]);
+                                } catch (NumberFormatException e) {
+                                    v1 = Double.valueOf(0.0D);
+                                }
+                                try {
+                                    v2 = Double.valueOf(st.split(">=")[1]);
+                                } catch (NumberFormatException e) {
+                                    v2 = Double.valueOf(0.0D);
+                                }
+                                if (v1.doubleValue() >= v2.doubleValue()) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(">")) {
+                                Double v1 = Double.valueOf(0.0D);
+                                Double v2 = Double.valueOf(0.0D);
+                                try {
+                                    v1 = Double.valueOf(st.split(">")[0]);
+                                } catch (NumberFormatException e) {
+                                    v1 = Double.valueOf(0.0D);
+                                }
+                                try {
+                                    v2 = Double.valueOf(st.split(">")[1]);
+                                } catch (NumberFormatException e) {
+                                    v2 = Double.valueOf(0.0D);
+                                }
+                                if (v1.doubleValue() > v2.doubleValue()) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains("<")) {
+                                Double v1 = Double.valueOf(0.0D);
+                                Double v2 = Double.valueOf(0.0D);
+                                try {
+                                    v1 = Double.valueOf(st.split("<")[0]);
+                                } catch (NumberFormatException e) {
+                                    v1 = Double.valueOf(0.0D);
+                                }
+                                try {
+                                    v2 = Double.valueOf(st.split("<")[1]);
+                                } catch (NumberFormatException e) {
+                                    v2 = Double.valueOf(0.0D);
+                                }
+                                if (v1.doubleValue() < v2.doubleValue()) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains("==")) {
+                                if (st.split("==")[0].equalsIgnoreCase(st.split("==")[1])) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains("!=")) {
+                                if (!st.split("!=")[0].equalsIgnoreCase(st.split("!=")[1])) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(".contains=")) {
+                                if (st.split(".contains=")[0].contains(st.split(".contains=")[1])) {
+                                    AND_TRUE_RESULTS++;
+                                }
+                            } else if (st.contains(".type=")){
+                                Boolean control = true;
+                                Object variable = st.split(".type=")[0];
+                                String type = st.split(".type=")[1];
+                                if (type.equalsIgnoreCase("number")){
+                                    try {
+                                        Double parse = Double.parseDouble(String.valueOf(variable));
+                                        control = true;
+                                    } catch (NumberFormatException ex) {
+                                        control = false;
+                                    }
+                                }
+                                if (control) AND_TRUE_RESULTS++;
+                            }
+                        }
+                        if (AND_TRUE_RESULTS >= ANDstatments.size()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+        } catch (NumberFormatException er) {
+            plugin.getLog().getLogger().log(Level.SEVERE, "An error occurred while executing %if%/%while% syntax. NumberFormatException");
+            return false;
+        }
         return true;
     }
 
-    private void runAction(Player player, String action) {
+    private void runAction(Player player, String action, RaffleData raffleData) {
         action = action.replace("[Delay=0]", "").replace("[Delay=0]", "");
         if (action.contains("[JavaScript=")) {
             HashMap<String, String> scripts = new HashMap<>();
@@ -245,12 +421,15 @@ public class ScriptSystem {
         }
         if (action.contains("[PlayerCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[PlayerCommand] ", "").replace("[PlayerCommand]", ""));
+            action = replaceArgs(action, raffleData);
             player.performCommand(action);
         } else if (action.contains("[ConsoleCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[ConsoleCommand] ", "").replace("[ConsoleCommand]", ""));
+            action = replaceArgs(action, raffleData);
             this.plugin.getServer().dispatchCommand((CommandSender) this.plugin.getServer().getConsoleSender(), action);
         } else if (action.contains("[OperatorCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[OperatorCommand] ", "").replace("[OperatorCommand]", ""));
+            action = replaceArgs(action, raffleData);
             if (!player.isOp()) {
                 player.setOp(true);
                 this.plugin.getServer().dispatchCommand((CommandSender) player, action);
@@ -260,24 +439,30 @@ public class ScriptSystem {
             }
         } else if (action.contains("[Message]")) {
             action = ChatColor.translateAlternateColorCodes('&', StringUtil.setPlaceholders(player, action.replace("[Message] ", "").replace("[Message]", "")));
+            action = replaceArgs(action, raffleData);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', action));
         } else if (action.contains("[Broadcast]")) {
             action = ChatColor.translateAlternateColorCodes('&', StringUtil.setPlaceholders(player, action.replace("[Broadcast] ", "").replace("[Broadcast]", "")));
+            action = replaceArgs(action, raffleData);
             this.plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', action));
         } else if (action.contains("[Sound]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Sound] ", "").replace("[Sound]", ""));
+            action = replaceArgs(action, raffleData);
             final float soundFloat = 1.0f;
             player.playSound(player.getLocation(), Sound.valueOf(action.toUpperCase()), soundFloat, soundFloat);
         } else if (action.contains("[VaultGive]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[VaultGive] ", "").replace("[VaultGive]", ""));
+            action = replaceArgs(action, raffleData);
             final int amount = Integer.parseInt(action);
             this.plugin.getEconomyDepend().get().depositPlayer((OfflinePlayer) player, (double) amount);
         } else if (action.contains("[VaultTake]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[VaultTake] ", "").replace("[VaultTake]", ""));
+            action = replaceArgs(action, raffleData);
             final int amount = Integer.parseInt(action);
             this.plugin.getEconomyDepend().get().withdrawPlayer((OfflinePlayer) player, (double) amount);
         } else if (action.contains("[Teleport]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Teleport] ", "").replace("[Teleport]", ""));
+            action = replaceArgs(action, raffleData);
             final String[] location = action.split(";");
             Location destination = null;
             if (location.length == 4) {
@@ -300,6 +485,7 @@ public class ScriptSystem {
             }
         } else if (action.contains("[GiveItem]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[GiveItem] ", "").replace("[GiveItem]", ""));
+            action = replaceArgs(action, raffleData);
             final String[] item = action.split(";");
             ItemStack newItem = null;
             if (item.length == 1) {
@@ -320,6 +506,7 @@ public class ScriptSystem {
             }
         } else if (action.contains("[RemoveItem]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[RemoveItem] ", "").replace("[RemoveItem]", ""));
+            action = replaceArgs(action, raffleData);
             final String[] item = action.split(";");
             ItemStack removeItem = null;
             if (item.length == 1) {
@@ -336,9 +523,11 @@ public class ScriptSystem {
             }
         } else if (action.contains("[CloseInventory]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[CloseInventory] ", "").replace("[CloseInventory]", ""));
+            action = replaceArgs(action, raffleData);
             player.closeInventory();
         } else if (action.contains("[Title]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Title] ", "").replace("[Title]", ""));
+            action = replaceArgs(action, raffleData);
             final String[] titleString = action.split(";");
             if (titleString.length == 1 || titleString.length == 2) {
                 this.plugin.getCompatabilityManager().sendTitle(player, StringUtil.setPlaceholders(player, titleString[0]));
@@ -348,22 +537,27 @@ public class ScriptSystem {
             }
         } else if (action.contains("[ActionBar]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[ActionBar] ", "").replace("[ActionBar]", ""));
+            action = replaceArgs(action, raffleData);
             this.plugin.getCompatabilityManager().sendAction(player, StringUtil.setPlaceholders(player, action));
         } else if (action.contains("[JSONMessage]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[JSONMessage] ", "").replace("[JSONMessage]", ""));
+            action = replaceArgs(action, raffleData);
             this.plugin.getCompatabilityManager().sendJSONMessage(player, action);
         } else if (action.contains("[JSONBroadcast]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[JSONBroadcast] ", "").replace("[JSONBroadcast]", ""));
+            action = replaceArgs(action, raffleData);
             this.plugin.getCompatabilityManager().sendJSONBroadcast(this.plugin.getServer().getOnlinePlayers(), action);
         } else if (action.contains("[Bungee]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Bungee] ", "").replace("[Bungee]", ""));
+            action = replaceArgs(action, raffleData);
             final ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
             out.writeUTF(action);
             player.sendPluginMessage((Plugin) this.plugin, "BungeeCord", out.toByteArray());
         } else if (action.contains("[addGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()){
+            if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[addGroup] ", "").replace("[addGroup]", ""));
+                action = replaceArgs(action, raffleData);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
@@ -378,8 +572,9 @@ public class ScriptSystem {
                 }
             }
         } else if (action.contains("[setGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()){
+            if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[setGroup] ", "").replace("[setGroup]", ""));
+                action = replaceArgs(action, raffleData);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
@@ -390,8 +585,9 @@ public class ScriptSystem {
                 }
             }
         } else if (action.contains("[removeGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()){
+            if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[removeGroup] ", "").replace("[removeGroup]", ""));
+                action = replaceArgs(action, raffleData);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
