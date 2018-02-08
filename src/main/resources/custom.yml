@@ -7,5 +7,5 @@ example:
   - '#Script#[IF]%player%==Draww'
   actions:
   - '[Broadcast] %prefix% &7Hello, &a%player%'
-  - '[Broadcast] %prefix% &7You''re World, &a%player_world%'
+  - '[Broadcast] %prefix% &7Your World, &a%player_world%'
   - '[Broadcast] %prefix% &7Example, &6$arg1'
