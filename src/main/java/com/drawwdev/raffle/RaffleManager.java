@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
 
 import static com.drawwdev.raffle.utils.StringUtil.cc;
 
@@ -29,43 +30,8 @@ public class RaffleManager {
 
     public RaffleManager(Main plugin) {
         this.plugin = plugin;
-        setRaffleStorage();
+        raffleStorage = new RaffleLoader(plugin, new RaffleStorage(plugin)).load();
         reset();
-    }
-
-    public void setRaffleStorage() {
-        raffleStorage = new RaffleStorage(plugin);
-        if (plugin.getEconomyDepend().dependent()) {
-            try {
-                raffleStorage.newBuilder("LEVEL")
-                        .setTime(5)
-                        .setDatatype("Numeral")
-                        .setConsumer(new RaffleConsumer() {
-                            @Override
-                            public void run(Player player, RaffleData raffleData) {
-                                Double money = Double.parseDouble(String.valueOf(raffleData.get(0)));
-                                plugin.getEconomyDepend().get().depositPlayer(player, money);
-                                Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a$" + money + " &7was given"));
-                            }
-                        })
-                        .setPredicate(new RafflePredicate() {
-                            @Override
-                            public boolean check(Player player, RaffleData raffleData) {
-                                if (raffleData.size() < 1) {
-                                    return false;
-                                }
-                                try {
-                                    Double parseDouble = Double.parseDouble(raffleData.get(0).toString());
-                                } catch (NumberFormatException error){
-                                    return false;
-                                }
-                                return true;
-                            }
-                        }).build();
-            } catch (RaffleException e) {
-                Bukkit.getConsoleSender().sendMessage(e.getMessage());
-            }
-        }
     }
 
     public void start(Player player, String raffleName, RaffleData raffleData, String... nonGroup) throws RaffleException {
