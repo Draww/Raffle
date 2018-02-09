@@ -3,13 +3,20 @@ D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\utils\ListUtil.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleMultipleBuilder.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleException.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\depend\PermissionsExDepend.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_9_R1.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleType.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_8_R1.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_10_R1.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_11_R1.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleManager.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_8_R3.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_12_R1.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleStorage.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\depend\EconomyDepend.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleCommand.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\depend\Depend.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\utils\Config.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_9_R2.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RaffleLoader.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\CustomRaffle.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\utils\InventoryUtils.java
@@ -23,4 +30,5 @@ D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\utils\StringUtil.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\Configs.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\Main.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\utils\Logger.java
+D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\nms\Compatability_1_8_R2.java
 D:\drawwDepo\Raffle\src\main\java\com\drawwdev\raffle\RafflePredicate.java

@@ -86,7 +86,7 @@ public class RaffleLoader {
 
     public void loadCustomRaffle(){
         if (plugin.getConfigs().has("custom")){
-            for (String custom : plugin.getConfigs().get("custom").getConfigurationSection("").getKeys(false)){
+            for (String custom : plugin.getConfigs().get("custom").getConfigurationSection("CustomRaffles").getKeys(false)){
                 if (raffleStorage.getAllKey().stream().noneMatch(p -> p.equals(custom))){
                     CustomRaffle customRaffle = new CustomRaffle(custom);
                     try {

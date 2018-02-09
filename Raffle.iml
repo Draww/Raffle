@@ -40,9 +40,90 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.19" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.12-SNAPSHOT" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: org.spigotmc:spigot1-12:1.12.2">
+      <library name="Maven: org.spigotmc:spigot1-12-2:1.12.2">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/spigot-1.12.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-11-2:1.11.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.11.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-10-2:1.10.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.10.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-9:1.9">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-9-4:1.9.4">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.9.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-8:1.8">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-8-3:1.8.3">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.8.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-8-5:1.8.5">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.8.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-8-6:1.8.6">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.8.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: org.spigotmc:spigot1-8-8:1.8.8">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.8.8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

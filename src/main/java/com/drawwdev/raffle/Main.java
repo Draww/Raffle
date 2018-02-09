@@ -3,8 +3,7 @@ package com.drawwdev.raffle;
 import com.drawwdev.raffle.depend.DependType;
 import com.drawwdev.raffle.depend.EconomyDepend;
 import com.drawwdev.raffle.depend.PermissionsExDepend;
-import com.drawwdev.raffle.nms.CompatabilityManager;
-import com.drawwdev.raffle.nms.Compatability_1_12_R1;
+import com.drawwdev.raffle.nms.*;
 import com.drawwdev.raffle.utils.Config;
 import com.drawwdev.raffle.utils.Logger;
 import com.drawwdev.raffle.utils.ScriptSystem;
@@ -26,8 +25,9 @@ public class Main extends JavaPlugin {
         String version = packageName.substring(packageName.lastIndexOf(46) + 1).trim();
         compatabilityManager = setupCompatabilityNMS(version);
         if (compatabilityManager == null) {
-            //this.getServer().getPluginManager().disablePlugin(this);
-            //return;
+            getLogger().severe(version + " is not supported!");
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
         }
         scriptSystem = new ScriptSystem(this);
         logger = new Logger(this);
@@ -52,6 +52,20 @@ public class Main extends JavaPlugin {
     private CompatabilityManager setupCompatabilityNMS(String version) {
         if (version.equals("v1_12_R1")) {
             return new Compatability_1_12_R1();
+        } else if (version.equals("v1_11_R1")) {
+            return new Compatability_1_11_R1();
+        } else if (version.equals("v1_10_R1")) {
+            return new Compatability_1_10_R1();
+        } else if (version.equals("v1_9_R1")) {
+            return new Compatability_1_9_R1();
+        } else if (version.equals("v1_9_R2")) {
+            return new Compatability_1_9_R2();
+        } else if (version.equals("v1_8_R1")) {
+            return new Compatability_1_8_R1();
+        } else if (version.equals("v1_8_R2")) {
+            return new Compatability_1_8_R2();
+        } else if (version.equals("v1_8_R3")) {
+            return new Compatability_1_8_R3();
         } else {
             return null;
         }
