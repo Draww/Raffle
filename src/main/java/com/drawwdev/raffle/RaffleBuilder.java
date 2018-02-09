@@ -21,7 +21,7 @@ public class RaffleBuilder {
 
     public RaffleBuilder(RaffleStorage raffle, String raffleName){
         this.raffle = raffle;
-        this.raffleName = raffleName.toUpperCase();
+        this.raffleName = raffleName;
         this.raffleType = RaffleType.NORMAL;
     }
 

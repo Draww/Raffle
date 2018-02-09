@@ -34,6 +34,11 @@ public class RaffleManager {
         reset();
     }
 
+    public void reload(){
+        reset();
+        raffleStorage = new RaffleLoader(plugin, new RaffleStorage(plugin)).load();
+    }
+
     public void start(Player player, String raffleName, RaffleData raffleData, String... nonGroup) throws RaffleException {
         if (getStatus()) throw new RaffleException(" &7There's a raffle going on!");
         if (getRaffleStorage().getConsumer(raffleName) == null)

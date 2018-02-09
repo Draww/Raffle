@@ -18,11 +18,11 @@ public class CustomRaffle extends Raffle {
     private String name;
 
     public CustomRaffle(String id) {
-        super(Main.getInstance().getConfigs().get("custom").getConfig().getInt("CustomRaffles" + id + ".time"), null, null, Main.getInstance().getConfigs().get("custom").getConfig().getString("CustomRaffles" + id + ".datatype", ""), RaffleType.CUSTOM);
+        super(Main.getInstance().getConfigs().get("custom").getConfig().getInt("CustomRaffles." + id + ".time"), null, null, Main.getInstance().getConfigs().get("custom").getConfig().getString("CustomRaffles." + id + ".datatype", ""), RaffleType.CUSTOM);
         config = Main.getInstance().getConfigs().get("custom");
-        actions = config.getConfig().getStringList("CustomRaffles" + id + ".actions");
-        predicate = config.getConfig().getStringList("CustomRaffles" + id + ".predicate");
-        name = config.getConfig().getString("CustomRaffles" + id + ".name");
+        actions = config.getConfig().getStringList("CustomRaffles." + id + ".actions");
+        predicate = config.getConfig().getStringList("CustomRaffles." + id + ".predicate");
+        name = config.getConfig().getString("CustomRaffles." + id + ".name");
         setConsumer((player, raffleData, fromPlayer) -> Main.getInstance().getScriptSystem().executeActions(player, getActions(), raffleData));
         setPredicate((player, raffleData) -> {
             Boolean r = false;

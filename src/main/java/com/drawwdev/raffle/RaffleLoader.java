@@ -90,7 +90,7 @@ public class RaffleLoader {
                 if (raffleStorage.getAllKey().stream().noneMatch(p -> p.equals(custom))){
                     CustomRaffle customRaffle = new CustomRaffle(custom);
                     try {
-                        raffleStorage.newBuilder(customRaffle.getName())
+                        raffleStorage.newBuilder(customRaffle.getName().toUpperCase())
                                 .setType(RaffleType.CUSTOM)
                                 .setTime(customRaffle.getTime())
                                 .setDatatype(customRaffle.getDatatype())

@@ -97,11 +97,17 @@ public class RaffleCommand implements CommandExecutor {
                     player.sendMessage(cc("&f- &b" + r + "&7(" + raffle.getDatatype() + ") " + state));
                 }
             }
+        } else if (args[0].equalsIgnoreCase("reload")){
+            plugin.reloadConfig();
+            Main.getInstance().getConfigs().get("custom").load();
+            getRaffleManager().reload();
+            player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7All systems reloaded and restored!"));
         } else if (args[0].equalsIgnoreCase("help")) {
             player.sendMessage(cc("&6o0=======&c[&eRaffle Help&c]&6========0o"));
             player.sendMessage(cc("&b/" + label + " start <type> <data> &f- &e" + "Starting a raffle"));
             player.sendMessage(cc("&b/" + label + " stop &f- &e" + "Stop the raffle"));
             player.sendMessage(cc("&b/" + label + " types &f- &e" + "RaffleStorage types"));
+            player.sendMessage(cc("&b/" + label + " reload &f- &e" + "Reloads the all systems"));
         }
         return true;
     }
