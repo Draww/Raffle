@@ -110,7 +110,7 @@ public class RaffleCommand implements CommandExecutor {
             player.sendMessage(cc("&6o0=======&c[&eRaffle Help&c]&6========0o"));
             player.sendMessage(cc("&b/" + label + " start <type> <data> &f- &e" + "Starting a raffle"));
             player.sendMessage(cc("&b/" + label + " stop &f- &e" + "Stop the raffle"));
-            player.sendMessage(cc("&b/" + label + " types &f- &e" + "RaffleStorage types"));
+            player.sendMessage(cc("&b/" + label + " types &f- &e" + "types of Raffles"));
             player.sendMessage(cc("&b/" + label + " reload &f- &e" + "Reloads the all systems"));
         }
         return true;

@@ -1,3 +1,4 @@
+configversion: 1
 prefix: '[PREFIX]'
 disabledGroup:
 - Owner
