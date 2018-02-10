@@ -31,6 +31,10 @@ public class RaffleCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
+        if (!player.hasPermission("raffle.*")){
+            sender.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7you are not authorized to perform this command."));
+            return true;
+        }
         if (args.length < 1) {
             player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7Command was entered missing."));
             return true;
