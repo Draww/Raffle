@@ -17,10 +17,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
@@ -115,6 +112,15 @@ public class ScriptSystem {
         return toReplace;
     }
 
+    public String math(String toReplace) {
+        if (toReplace.contains("$math(")){
+            String matheditor = toReplace.split(Pattern.quote("$math("))[1].split(Pattern.quote(")"))[0];
+            Double returnDouble = arithmeticExpression.eval(matheditor);
+            toReplace = toReplace.replace("$math(" + matheditor + ")", String.valueOf(returnDouble.toString()));
+        }
+        return toReplace;
+    }
+
     public Boolean runCondition(Player player, String action, RaffleData raffleData) {
         int chance = 100;
         if (action.contains("[Chance=")) {
@@ -126,7 +132,7 @@ public class ScriptSystem {
                         final double chanceCheck = Math.random() * 100.0;
                         if (chanceCheck > chance) {
                             if (action.contains("[Action]")) {
-                                action.replace("[Action] ", "").replace("[Action]", "");
+                                action.replace("[ElseAction] ", "").replace("[ElseAction]", "");
                                 executeAction(player, action, raffleData);
                             }
                             return false;
@@ -137,7 +143,7 @@ public class ScriptSystem {
         }
         if (action.contains("[HasItem]")) {
             action = action.replace("[HasItem] ", "").replace("[HasItem]", "");
-            String[] splitAction = action.split(Pattern.quote(" [Action] "));
+            String[] splitAction = action.split(Pattern.quote(" [ElseAction] "));
             final String[] item = splitAction[0].split(";");
             Integer stackItem = Integer.parseInt(item[1]);
             if (item[2] != null) {
@@ -161,7 +167,7 @@ public class ScriptSystem {
                 return false;
             }
             action = action.replace("[HaveMoney] ", "").replace("[HaveMoney]", "");
-            String[] splitAction = action.split(Pattern.quote(" [Action] "));
+            String[] splitAction = action.split(Pattern.quote(" [ElseAction] "));
             Double moneyPlayer = Main.getInstance().getEconomyDepend().get().getBalance(player);
             Double needMoney = Double.parseDouble(splitAction[0]);
             if (moneyPlayer < needMoney) {
@@ -173,7 +179,7 @@ public class ScriptSystem {
         }
         if (action.contains("[HaveLevel]")) {
             action = action.replace("[HaveLevel] ", "").replace("[HaveLevel]", "");
-            String[] splitAction = action.split(Pattern.quote(" [Action] "));
+            String[] splitAction = action.split(Pattern.quote(" [ElseAction] "));
             Integer levelPlayer = player.getLevel();
             Integer needLevel = Integer.parseInt(splitAction[0]);
             if (levelPlayer < needLevel) {
@@ -185,7 +191,7 @@ public class ScriptSystem {
         }
         if (action.contains("[hasGroup]")) {
             action = action.replace("[hasGroup] ", "").replace("[hasGroup]", "");
-            String[] splitAction = action.split(Pattern.quote(" [Action] "));
+            String[] splitAction = action.split(Pattern.quote(" [ElseAction] "));
             PermissionUser permissionUser = PermissionsEx.getUser(player);
             Boolean controlGroup = true;
             for (String group : permissionUser.getGroupNames()) {
@@ -206,9 +212,16 @@ public class ScriptSystem {
             if (action.contains("#Script#")) {
                 action = action.replace("#Script# ", "").replace("#Script#", "");
                 if (action.contains("[IF]")) {
+                    List<String> elseActions = new ArrayList<>();
                     action = action.replace("[IF] ", "").replace("[IF]", "");
+                    if (action.contains(" [ElseAction] ")){
+                        String elsestring = action.split(Pattern.quote(" [ElseAction] "))[1];
+                        action = action.split(Pattern.quote(" [ElseAction] "))[0];
+                        elseActions.addAll(Arrays.asList(elsestring.split(";")));
+                    }
                     action = replaceArgs(action, raffleData);
                     action = StringUtil.setPlaceholders(player, action);
+                    action = math(action);
 
                     ArrayList<String> ORstatments = new ArrayList<>();
                     if (action.split("<or>").length > 1) {
@@ -353,6 +366,12 @@ public class ScriptSystem {
                         }
                         if (AND_TRUE_RESULTS >= ANDstatments.size()) {
                             return true;
+                        } else {
+                            if (!elseActions.isEmpty()) {
+                                for (String ea : elseActions){
+                                    runAction(player, ea, raffleData);
+                                }
+                            }
                         }
                     }
                     return false;
@@ -396,6 +415,8 @@ public class ScriptSystem {
                             final String orginalScript;
                             script = (orginalScript = action.substring(i + 12, e));
                             script = StringUtil.setPlaceholders(player, script);
+                            script = replaceArgs(script, raffleData);
+                            script = math(script).toString();
                             String result = null;
                             try {
                                 final Object obj = engine.eval(script);
@@ -422,14 +443,17 @@ public class ScriptSystem {
         if (action.contains("[PlayerCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[PlayerCommand] ", "").replace("[PlayerCommand]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             player.performCommand(action);
         } else if (action.contains("[ConsoleCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[ConsoleCommand] ", "").replace("[ConsoleCommand]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             this.plugin.getServer().dispatchCommand((CommandSender) this.plugin.getServer().getConsoleSender(), action);
         } else if (action.contains("[OperatorCommand]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[OperatorCommand] ", "").replace("[OperatorCommand]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             if (!player.isOp()) {
                 player.setOp(true);
                 this.plugin.getServer().dispatchCommand((CommandSender) player, action);
@@ -440,29 +464,39 @@ public class ScriptSystem {
         } else if (action.contains("[Message]")) {
             action = ChatColor.translateAlternateColorCodes('&', StringUtil.setPlaceholders(player, action.replace("[Message] ", "").replace("[Message]", "")));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', action));
         } else if (action.contains("[Broadcast]")) {
             action = ChatColor.translateAlternateColorCodes('&', StringUtil.setPlaceholders(player, action.replace("[Broadcast] ", "").replace("[Broadcast]", "")));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             this.plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', action));
         } else if (action.contains("[Sound]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Sound] ", "").replace("[Sound]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final float soundFloat = 1.0f;
             player.playSound(player.getLocation(), Sound.valueOf(action.toUpperCase()), soundFloat, soundFloat);
         } else if (action.contains("[VaultGive]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[VaultGive] ", "").replace("[VaultGive]", ""));
-            action = replaceArgs(action, raffleData);
-            final int amount = Integer.parseInt(action);
-            this.plugin.getEconomyDepend().get().depositPlayer((OfflinePlayer) player, (double) amount);
+            if (plugin.getEconomyDepend().dependent()){
+                action = StringUtil.setPlaceholders(player, action.replace("[VaultGive] ", "").replace("[VaultGive]", ""));
+                action = replaceArgs(action, raffleData);
+                action = math(action);
+                final int amount = Integer.parseInt(action);
+                this.plugin.getEconomyDepend().get().depositPlayer((OfflinePlayer) player, (double) amount);
+            }
         } else if (action.contains("[VaultTake]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[VaultTake] ", "").replace("[VaultTake]", ""));
-            action = replaceArgs(action, raffleData);
-            final int amount = Integer.parseInt(action);
-            this.plugin.getEconomyDepend().get().withdrawPlayer((OfflinePlayer) player, (double) amount);
+            if (plugin.getEconomyDepend().dependent()){
+                action = StringUtil.setPlaceholders(player, action.replace("[VaultTake] ", "").replace("[VaultTake]", ""));
+                action = replaceArgs(action, raffleData);
+                action = math(action);
+                final int amount = Integer.parseInt(action);
+                this.plugin.getEconomyDepend().get().withdrawPlayer((OfflinePlayer) player, (double) amount);
+            }
         } else if (action.contains("[Teleport]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Teleport] ", "").replace("[Teleport]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final String[] location = action.split(";");
             Location destination = null;
             if (location.length == 4) {
@@ -486,6 +520,7 @@ public class ScriptSystem {
         } else if (action.contains("[GiveItem]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[GiveItem] ", "").replace("[GiveItem]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final String[] item = action.split(";");
             ItemStack newItem = null;
             if (item.length == 1) {
@@ -507,6 +542,7 @@ public class ScriptSystem {
         } else if (action.contains("[RemoveItem]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[RemoveItem] ", "").replace("[RemoveItem]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final String[] item = action.split(";");
             ItemStack removeItem = null;
             if (item.length == 1) {
@@ -524,10 +560,12 @@ public class ScriptSystem {
         } else if (action.contains("[CloseInventory]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[CloseInventory] ", "").replace("[CloseInventory]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             player.closeInventory();
         } else if (action.contains("[Title]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Title] ", "").replace("[Title]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final String[] titleString = action.split(";");
             if (titleString.length == 1 || titleString.length == 2) {
                 this.plugin.getCompatabilityManager().sendTitle(player, StringUtil.setPlaceholders(player, titleString[0]));
@@ -538,18 +576,22 @@ public class ScriptSystem {
         } else if (action.contains("[ActionBar]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[ActionBar] ", "").replace("[ActionBar]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             this.plugin.getCompatabilityManager().sendAction(player, StringUtil.setPlaceholders(player, action));
         } else if (action.contains("[JSONMessage]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[JSONMessage] ", "").replace("[JSONMessage]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             this.plugin.getCompatabilityManager().sendJSONMessage(player, action);
         } else if (action.contains("[JSONBroadcast]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[JSONBroadcast] ", "").replace("[JSONBroadcast]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             this.plugin.getCompatabilityManager().sendJSONBroadcast(this.plugin.getServer().getOnlinePlayers(), action);
         } else if (action.contains("[Bungee]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Bungee] ", "").replace("[Bungee]", ""));
             action = replaceArgs(action, raffleData);
+            action = math(action);
             final ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
             out.writeUTF(action);
@@ -558,6 +600,7 @@ public class ScriptSystem {
             if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[addGroup] ", "").replace("[addGroup]", ""));
                 action = replaceArgs(action, raffleData);
+                action = math(action);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
@@ -575,6 +618,7 @@ public class ScriptSystem {
             if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[setGroup] ", "").replace("[setGroup]", ""));
                 action = replaceArgs(action, raffleData);
+                action = math(action);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
@@ -588,6 +632,7 @@ public class ScriptSystem {
             if (plugin.getPermissionsExDepend().dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[removeGroup] ", "").replace("[removeGroup]", ""));
                 action = replaceArgs(action, raffleData);
+                action = math(action);
                 String[] splitAction = action.split(" [World] ");
                 String[] groups = splitAction[0].split(", ");
                 PermissionUser permissionUser = PermissionsEx.getUser(player.getName());
