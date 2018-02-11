@@ -24,16 +24,16 @@ public class RaffleLoader {
                     .setDatatype("Numeral")
                     .addDepend(plugin.getEconomyDepend())
                     .setConsumer((player, raffleData, fromPlayer) -> {
-                        Double money = Double.parseDouble(String.valueOf(raffleData.get(0)));
-                        plugin.getEconomyDepend().get().depositPlayer(player, money);
-                        Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a$" + money + " &7was given"));
+                        Double MONEY = Double.parseDouble(String.valueOf(raffleData.get(0)));
+                        plugin.getEconomyDepend().get().depositPlayer(player, MONEY);
+                        Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("given", player.getName(), MONEY)));
                     })
                     .setPredicate((fromPlayer, raffleData) -> {
                         if (raffleData.size() < 1) {
                             return false;
                         }
                         try {
-                            Double parseDouble = Double.parseDouble(raffleData.get(0).toString());
+                            Double MONEY = Double.parseDouble(raffleData.get(0).toString());
                         } catch (NumberFormatException error) {
                             return false;
                         }
@@ -45,7 +45,7 @@ public class RaffleLoader {
                     .setConsumer((player, raffleData, fromPlayer) -> {
                         Integer EXP = Integer.parseInt(String.valueOf(raffleData.get(0)));
                         player.giveExp(EXP);
-                        Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a" + EXP + " Exp &7was given"));
+                        Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("given", player.getName(), EXP)));
                     })
                     .setPredicate((fromPlayer, raffleData) -> {
                         if (raffleData.size() < 1) {
@@ -64,7 +64,7 @@ public class RaffleLoader {
                     .setConsumer((player, raffleData, fromPlayer) -> {
                         Integer LEVEL = Integer.parseInt(String.valueOf(raffleData.get(0)));
                         player.giveExpLevels(LEVEL);
-                        Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &6The player " + player.getName() + " &7a &a" + LEVEL + " Level &7was given"));
+                        Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("given", player.getName(), LEVEL)));
                     })
                     .setPredicate((fromPlayer, raffleData) -> {
                         if (raffleData.size() < 1) {
@@ -78,7 +78,7 @@ public class RaffleLoader {
                         return true;
                     }).build();
         } catch (RaffleException e) {
-            plugin.getLog().getLogger().log(Level.SEVERE, e.getMessage());
+            plugin.getLogger().log(Level.SEVERE, e.getMessage());
         }
         loadCustomRaffle();
         return raffleStorage;

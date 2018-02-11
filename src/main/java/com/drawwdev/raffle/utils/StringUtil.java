@@ -72,7 +72,7 @@ public class StringUtil {
         if (!paramString.contains("%")) {
             return paramString;
         }
-        paramString = paramString.replace("%prefix%", cc(Main.getInstance().getConfig().getString("prefix")));
+        paramString = paramString.replace("%prefix%", cc(Main.getInstance().getLanguage().tl("prefix")));
         paramString = paramString.replace("%server_motd%", Bukkit.getServer().getMotd());
         paramString = paramString.replace("%server_maxplayers%", String.valueOf(Bukkit.getServer().getMaxPlayers()));
         paramString = paramString.replace("%server_playercount%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()));

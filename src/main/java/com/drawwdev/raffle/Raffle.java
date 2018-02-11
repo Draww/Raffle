@@ -1,10 +1,13 @@
 package com.drawwdev.raffle;
 
+import java.util.List;
+
 public class Raffle {
 
     private Integer time;
     private RaffleConsumer consumer;
     private RafflePredicate predicate;
+    private List<String> disabledGroups;
     private String datatype;
     private RaffleType raffleType;
 
@@ -12,10 +15,11 @@ public class Raffle {
 
     }
 
-    public Raffle(Integer time, RaffleConsumer consumer, RafflePredicate predicate, String datatype, RaffleType raffleType){
+    public Raffle(Integer time, RaffleConsumer consumer, RafflePredicate predicate, List<String> disabledGroups, String datatype, RaffleType raffleType){
         this.time = time;
         this.consumer = consumer;
         this.predicate = predicate;
+        this.disabledGroups = disabledGroups;
         this.datatype = datatype;
         this.raffleType = raffleType;
     }
@@ -58,5 +62,13 @@ public class Raffle {
 
     public void setRaffleType(RaffleType raffleType) {
         this.raffleType = raffleType;
+    }
+
+    public List<String> getDisabledGroups() {
+        return disabledGroups;
+    }
+
+    public void setDisabledGroups(List<String> disabledGroups) {
+        this.disabledGroups = disabledGroups;
     }
 }

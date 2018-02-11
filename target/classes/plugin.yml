@@ -1,6 +1,6 @@
 name: Raffle
 main: com.drawwdev.raffle.Main
-version: 1.3.5.1
+version: 1.3.6
 author: drawwdev
 website: https://github.com/Draww/Raffle
 commands:
@@ -9,4 +9,20 @@ commands:
     usage: /raffle
 permissions:
   raffle.*:
+    default: op
+    children:
+      raffle.help: true
+      raffle.start: true
+      raffle.stop: true
+      raffle.types: true
+      raffle.reload: true
+  raffle.help:
+    default: op
+  raffle.start:
+    default: op
+  raffle.stop:
+    default: op
+  raffle.types:
+    default: op
+  raffle.reload:
     default: op

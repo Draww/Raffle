@@ -1,0 +1,22 @@
+prefix: '&8[&aRaffle&8] &7'
+
+only-game-command: 'you can only do it from the game.'
+not-authorized-command: 'you are not authorized to perform this command.'
+missing-command: 'Command was entered missing.'
+already-continue: 'there''s already a raffle going on.'
+no-ongoing: 'There''s no Raffles right now'
+not-met-conditions: 'You don''t meet the conditions'
+
+starting-raffle: 'Starting the raffle.'
+started-raffle: 'The raffle started!'
+stopped-raffle: 'The raffle stopped!'
+disabled-raffle: 'This raffle is disabled!'
+raffle-identified: 'This raffle is not identified.'
+no-such-raffletype: 'No such raffle type.'
+winner-raffle: '&7Winner: &6&l{0}'
+determine-counter: '&d&llast {0} seconds to determine the lucky one.'
+given: '&6The player {0} &7a &a{1} Level &7was given'
+
+permissionsex-not-depend: 'PermissionsEx not dependent'
+reload: 'All systems reloaded and restored!'
+

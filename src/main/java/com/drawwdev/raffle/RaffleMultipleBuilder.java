@@ -13,6 +13,7 @@ public class RaffleMultipleBuilder {
     private List<String> raffleNames = null;
     private RaffleConsumer raffleConsumer = null;
     private RafflePredicate rafflePredicate = null;
+    private List<String> disabledGroups;
     private Integer time = null;
     private String datatype = "";
     private RaffleType raffleType;
@@ -63,6 +64,26 @@ public class RaffleMultipleBuilder {
         return this;
     }
 
+    public RaffleMultipleBuilder setDisabledGroups(List<String> list){
+        this.disabledGroups = list;
+        return this;
+    }
+
+    public RaffleMultipleBuilder deleteDisabledGroups(List<String> list){
+        this.disabledGroups.removeAll(list);
+        return this;
+    }
+
+    public RaffleMultipleBuilder addDisabledGroups(String string){
+        this.disabledGroups.add(string);
+        return this;
+    }
+
+    public RaffleMultipleBuilder removeDisabledGroups(String string){
+        this.disabledGroups.remove(string);
+        return this;
+    }
+
     public RaffleMultipleBuilder addDepend(Depend depend) {
         if (!depends.containsKey(depend.getClass())){
             this.depends.put(depend.getClass(), depend);
@@ -87,7 +108,7 @@ public class RaffleMultipleBuilder {
                 }
             }
             for (String rT : raffleNames){
-                raffle.create(rT, raffleConsumer, rafflePredicate, time, datatype, raffleType);
+                raffle.create(rT, raffleConsumer, rafflePredicate, disabledGroups, time, datatype, raffleType);
             }
         } else {
             throw new RaffleException("Missing data");

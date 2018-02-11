@@ -3,11 +3,15 @@ CustomRaffles:
     name: example1
     datatype: 'Numeral'
     time: 5
+    disabledGroups:
+    - Owner
     predicate:
     - '#Script#[IF]$arg1.type=NUMBER'
     - '#Script#[IF]%player%==Draww'
-    - '#Script#[IF]$math($arg1 + 1)==6.0 [ElseAction] [Message] example1;[Message] example2'
+    - '#Script#[IF]$arg1==5 [ElseAction] [Message] example1'
+    - '#Script#[IF]$math($arg1 + 5 - 1 + 1)==6.0 [ElseAction] [Message] example2;[Message] example3'
     actions:
     - '[Broadcast] %prefix% &7Hello, &a%player%'
     - '[Broadcast] %prefix% &7Your World, &a%player_world%'
     - '[Broadcast] %prefix% &7Example, &6$math($arg1 + 1)'
+    - '#PlayerOptions#(addItem)DIAMOND_SWORD:1'

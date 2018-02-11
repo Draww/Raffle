@@ -1,6 +1,7 @@
 com\drawwdev\raffle\depend\PermissionsExDepend.class
 com\drawwdev\raffle\utils\Config.class
 com\drawwdev\raffle\RafflePredicate.class
+com\drawwdev\raffle\Language.class
 com\drawwdev\raffle\depend\Depend.class
 com\drawwdev\raffle\utils\StringUtil.class
 com\drawwdev\raffle\RaffleBuilder.class
@@ -24,6 +25,5 @@ com\drawwdev\raffle\utils\InventoryUtils.class
 com\drawwdev\raffle\utils\ListUtil.class
 com\drawwdev\raffle\nms\CompatabilityManager.class
 com\drawwdev\raffle\Configs.class
-com\drawwdev\raffle\utils\Logger.class
 com\drawwdev\raffle\Main.class
 com\drawwdev\raffle\RaffleMultipleBuilder.class

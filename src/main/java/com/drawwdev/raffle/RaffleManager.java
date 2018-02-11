@@ -40,10 +40,9 @@ public class RaffleManager {
     }
 
     public void start(Player player, String raffleName, RaffleData raffleData, String... nonGroup) throws RaffleException {
-        if (getStatus()) throw new RaffleException(" &7There's a raffle going on!");
-        if (getRaffleStorage().getConsumer(raffleName) == null)
-            throw new RaffleException(" &7This type is not identified.");
-        player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7Starting the raffle."));
+        if (getStatus()) throw new RaffleException(plugin.getLanguage().tl("already-continue"));
+        if (getRaffleStorage().getConsumer(raffleName) == null) throw new RaffleException(plugin.getLanguage().tl("raffle-identified"));
+        player.sendMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("starting-raffle")));
         status = true;
         this.maker = player;
         this.raffleName = raffleName;
@@ -52,7 +51,7 @@ public class RaffleManager {
             task = null;
         }
         this.taskTimer = 0;
-        Bukkit.broadcastMessage(cc(getPlugin().getConfig().getString("prefix") + " &7The raffle started!"));
+        Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("started-raffle")));
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         List<Player> organizedPlayers = new ArrayList<>();
         if (nonGroup.length > 0 && plugin.getPermissionsExDepend().dependent()) {
@@ -75,21 +74,21 @@ public class RaffleManager {
 
             if (countdown <= 0) {
                 Player randomPlayer = ListUtil.getList(finalOrganizedPlayers);
-                Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &7Winner: &6&l" + randomPlayer.getName()));
+                Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("winner-raffle", randomPlayer.getName())));
                 task.cancel();
                 status = false;
                 task = null;
                 getRaffleStorage().getConsumer(raffleName).run(randomPlayer, raffleData, maker);
                 return;
             }
-            Bukkit.broadcastMessage(cc(plugin.getConfig().getString("prefix") + " &d&llast " + countdown + " seconds to determine the lucky one."));
+            Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("determine-counter", countdown)));
         }, 20L, 20L);
     }
 
     public void stop(Player player) throws RaffleException {
-        if (!getStatus()) throw new RaffleException(" &7There's no Raffles right now!");
+        if (!getStatus()) throw new RaffleException(plugin.getLanguage().tl("no-ongoing"));
         reset();
-        player.sendMessage(cc(plugin.getConfig().getString("prefix") + " &7The raffle stopped."));
+        player.sendMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("stopped-raffle")));
     }
 
     public void reset() {

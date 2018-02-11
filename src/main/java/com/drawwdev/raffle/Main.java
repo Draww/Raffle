@@ -5,7 +5,6 @@ import com.drawwdev.raffle.depend.EconomyDepend;
 import com.drawwdev.raffle.depend.PermissionsExDepend;
 import com.drawwdev.raffle.nms.*;
 import com.drawwdev.raffle.utils.Config;
-import com.drawwdev.raffle.utils.Logger;
 import com.drawwdev.raffle.utils.ScriptSystem;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,10 +13,10 @@ public class Main extends JavaPlugin {
     public static Main instance;
     private EconomyDepend economyDepend;
     private PermissionsExDepend permissionsExDepend;
-    private Logger logger;
     private Configs configs;
     private CompatabilityManager compatabilityManager;
     private ScriptSystem scriptSystem;
+    private Language language;
 
     @Override
     public void onEnable() {
@@ -30,11 +29,11 @@ public class Main extends JavaPlugin {
             return;
         }
         scriptSystem = new ScriptSystem(this);
-        logger = new Logger(this);
         instance = this;
         saveDefaultConfig();
         configs = new Configs(this);
         loadConfigs();
+        language = new Language(this, getConfigs().get("language"));
         economyDepend = new EconomyDepend(this, DependType.NORMAL);
         permissionsExDepend = new PermissionsExDepend(this, DependType.NORMAL);
         new RaffleCommand(this);
@@ -47,6 +46,7 @@ public class Main extends JavaPlugin {
 
     public void loadConfigs(){
         getConfigs().add("custom", new Config(this, "custom.yml", true));
+        getConfigs().add("language", new Config(this, "language.yml", true));
     }
 
     private CompatabilityManager setupCompatabilityNMS(String version) {
@@ -83,10 +83,6 @@ public class Main extends JavaPlugin {
         return permissionsExDepend;
     }
 
-    public Logger getLog() {
-        return logger;
-    }
-
     public Configs getConfigs() {
         return configs;
     }
@@ -97,5 +93,9 @@ public class Main extends JavaPlugin {
 
     public ScriptSystem getScriptSystem() {
         return scriptSystem;
+    }
+
+    public Language getLanguage() {
+        return language;
     }
 }
