@@ -1,8 +1,9 @@
 name: Raffle
 main: com.drawwdev.raffle.Main
-version: 1.3.6
+version: 1.3.6.2
 author: drawwdev
 website: https://github.com/Draww/Raffle
+softdepend: [PlaceholderAPI]
 commands:
   raffle:
     description: Raffle main command

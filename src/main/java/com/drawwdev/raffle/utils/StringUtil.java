@@ -1,6 +1,7 @@
 package com.drawwdev.raffle.utils;
 
 import com.drawwdev.raffle.Main;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.apache.commons.codec.DecoderException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -88,6 +89,9 @@ public class StringUtil {
             paramString = paramString.replace("%player_world%", String.valueOf(paramPlayer.getWorld().getName()));
             paramString = paramString.replace("%player_level%", String.valueOf(paramPlayer.getLevel()));
             paramString = paramString.replace("%player_exp%", String.valueOf(paramPlayer.getExp()));
+        }
+        if (Main.getInstance().getPlaceholderDepend().dependent()){
+            paramString = PlaceholderAPI.setPlaceholders(paramPlayer, paramString);
         }
         return paramString;
     }

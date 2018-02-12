@@ -3,6 +3,7 @@ package com.drawwdev.raffle;
 import com.drawwdev.raffle.depend.DependType;
 import com.drawwdev.raffle.depend.EconomyDepend;
 import com.drawwdev.raffle.depend.PermissionsExDepend;
+import com.drawwdev.raffle.depend.PlaceholderDepend;
 import com.drawwdev.raffle.nms.*;
 import com.drawwdev.raffle.utils.Config;
 import com.drawwdev.raffle.utils.ScriptSystem;
@@ -13,6 +14,7 @@ public class Main extends JavaPlugin {
     public static Main instance;
     private EconomyDepend economyDepend;
     private PermissionsExDepend permissionsExDepend;
+    private PlaceholderDepend placeholderDepend;
     private Configs configs;
     private CompatabilityManager compatabilityManager;
     private ScriptSystem scriptSystem;
@@ -36,6 +38,7 @@ public class Main extends JavaPlugin {
         language = new Language(this, getConfigs().get("language"));
         economyDepend = new EconomyDepend(this, DependType.NORMAL);
         permissionsExDepend = new PermissionsExDepend(this, DependType.NORMAL);
+        placeholderDepend = new PlaceholderDepend(this, DependType.NORMAL);
         new RaffleCommand(this);
     }
 
@@ -81,6 +84,10 @@ public class Main extends JavaPlugin {
 
     public PermissionsExDepend getPermissionsExDepend() {
         return permissionsExDepend;
+    }
+
+    public PlaceholderDepend getPlaceholderDepend() {
+        return placeholderDepend;
     }
 
     public Configs getConfigs() {

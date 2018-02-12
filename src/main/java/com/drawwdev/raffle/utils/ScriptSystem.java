@@ -43,6 +43,9 @@ public class ScriptSystem {
     }
 
     private boolean executeAction(Player player, String action, RaffleData raffleData) {
+        if (action == null){
+            return false;
+        }
         int delayTimer = 0;
         int chance = 100;
         if (action.contains("[Chance=")) {
@@ -50,30 +53,6 @@ public class ScriptSystem {
                 if (action.contains("[Chance=" + i + "]")) {
                     chance = i;
                     action = action.replace("[Chance=" + i + "] ", "").replace("[Chance=" + i + "]", "");
-                }
-            }
-        }
-        if (action.contains("[HasItem]")) {
-            action = action.replace("[HasItem] ", "").replace("[HasItem]", "");
-            final String[] item = action.split(";");
-            ItemStack hasItem = null;
-            Integer stackItem = null;
-            if (item.length == 1) {
-                hasItem = new ItemStack(Material.valueOf(item[0]), 1);
-            } else if (item.length == 2) {
-                hasItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]));
-                stackItem = Integer.valueOf(item[1]);
-            } else if (item.length == 3) {
-                hasItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]), (short) (byte) Integer.parseInt(item[2]));
-            } else if (item.length == 4) {
-                hasItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]), (short) (byte) Integer.parseInt(item[2]));
-                final ItemMeta meta = hasItem.getItemMeta();
-                meta.setDisplayName(StringUtil.setPlaceholders(player, item[3]));
-                hasItem.setItemMeta(meta);
-            }
-            if (hasItem != null && stackItem != null) {
-                if (!player.getInventory().containsAtLeast(hasItem, stackItem)) {
-                    return false;
                 }
             }
         }
@@ -696,6 +675,13 @@ public class ScriptSystem {
     }
 
     private void runAction(Player player, String action, RaffleData raffleData) {
+        if (action.contains("[SyncTask]")){
+            action = action.replace("[SyncTask] ", "").replace("[SyncTask]", "");
+
+            String finalAction = action;
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> runAction(player, finalAction, raffleData));
+            return;
+        }
         action = action.replace("[Delay=0]", "").replace("[Delay=0]", "");
         if (action.contains("[JavaScript=")) {
             HashMap<String, String> scripts = new HashMap<>();
@@ -832,47 +818,8 @@ public class ScriptSystem {
             action = StringUtil.setPlaceholders(player, action.replace("[GiveItem] ", "").replace("[GiveItem]", ""));
             action = replaceArgs(action, raffleData);
             action = math(action);
-            final String[] item = action.split(";");
-            ItemStack newItem = null;
-            if (item.length >= 1) {
-                newItem = new ItemStack(Material.valueOf(item[0]), 1);
-                if (item.length >= 2) {
-                    if (item[1] != "") {
-                        newItem.setAmount(Integer.parseInt(item[1]));
-                    } else {
-                        newItem.setAmount(1);
-                    }
-                    if (item.length >= 3) {
-                        if (item[2] != "") {
-                            newItem.setDurability(Short.parseShort(item[2]));
-                        }
-                        if (item.length >= 4) {
-                            if (item[3] != "") {
-                                newItem.setData(new MaterialData(Material.valueOf(item[0]), Byte.parseByte(item[3])));
-                            }
-                            if (item.length >= 5) {
-                                if (item[4] != "") {
-                                    ItemMeta meta = newItem.getItemMeta();
-                                    meta.setDisplayName(StringUtil.cc(item[4]));
-                                    newItem.setItemMeta(meta);
-                                }
-                                if (item.length >= 6) {
-                                    if (item[6] != "") {
-                                        List<String> splitLore = Arrays.asList(item[6].split(":"));
-                                        ItemMeta meta = newItem.getItemMeta();
-                                        List<String> colorizedLore = new ArrayList<>();
-                                        for (String s : splitLore) {
-                                            colorizedLore.add(StringUtil.cc(s));
-                                        }
-                                        meta.setLore(colorizedLore);
-                                        newItem.setItemMeta(meta);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            final String[] item = action.split(":");
+            ItemStack newItem = CreateItemStack(player, item, raffleData);
             if (newItem != null) {
                 if (player.getInventory().firstEmpty() < 0) {
                     player.getWorld().dropItemNaturally(player.getLocation(), newItem);
@@ -884,25 +831,11 @@ public class ScriptSystem {
             action = StringUtil.setPlaceholders(player, action.replace("[RemoveItem] ", "").replace("[RemoveItem]", ""));
             action = replaceArgs(action, raffleData);
             action = math(action);
-            final String[] item = action.split(";");
-            ItemStack removeItem = null;
-            if (item.length == 1) {
-                removeItem = new ItemStack(Material.valueOf(item[0]), 1);
-            } else if (item.length == 2) {
-                removeItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]));
-            } else if (item.length == 3) {
-                removeItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]), (short) Integer.parseInt(item[2]));
-            } else if (item.length == 4) {
-                removeItem = new ItemStack(Material.valueOf(item[0]), Integer.parseInt(item[1]), (short) Integer.parseInt(item[2]), (byte) Integer.parseInt(item[3]));
-            }
+            final String[] item = action.split(":");
+            ItemStack removeItem = CreateItemStack(player, item, raffleData);
             if (removeItem != null) {
                 player.getInventory().removeItem(removeItem);
             }
-        } else if (action.contains("[CloseInventory]")) {
-            action = StringUtil.setPlaceholders(player, action.replace("[CloseInventory] ", "").replace("[CloseInventory]", ""));
-            action = replaceArgs(action, raffleData);
-            action = math(action);
-            player.closeInventory();
         } else if (action.contains("[Title]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Title] ", "").replace("[Title]", ""));
             action = replaceArgs(action, raffleData);
