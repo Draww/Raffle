@@ -1,5 +1,6 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.depend.PermissionsExDepend;
 import com.drawwdev.raffle.utils.ListUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
@@ -54,9 +55,9 @@ public class RaffleManager {
         Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("started-raffle")));
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         List<Player> organizedPlayers = new ArrayList<>();
-        if (nonGroup.length > 0 && plugin.getPermissionsExDepend().dependent()) {
+        if (nonGroup.length > 0 && plugin.getDepends().get("PermissionsEx").dependent()) {
             for (Player p : onlinePlayers) {
-                PermissionUser user = plugin.getPermissionsExDepend().getUser(p);
+                PermissionUser user = ((PermissionsExDepend) plugin.getDepends().get("PermissionsEx")).getUser(p);
                 for (String group : user.getGroupNames()) {
                     if (!Arrays.stream(nonGroup).parallel().anyMatch(group::contains)) {
                         organizedPlayers.add(p);

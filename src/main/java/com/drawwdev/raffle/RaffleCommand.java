@@ -67,7 +67,7 @@ public class RaffleCommand implements CommandExecutor {
             if (getRaffleManager().getRaffleStorage().getPredicate(rType).check(player, raffleData)){
                 try {
                     if (!getRaffleManager().getRaffleStorage().getDisabledGroups(rType).isEmpty()) {
-                        if (plugin.getPermissionsExDepend().dependent()){
+                        if (plugin.getDepends().get("PermissionsEx").dependent()){
                             getRaffleManager().start(player, rType, raffleData, getRaffleManager().getRaffleStorage().getDisabledGroups(rType).toArray(new String[0]));
                         } else {
                             player.sendMessage(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("permissionsex-not-depend"));

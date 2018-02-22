@@ -8,10 +8,13 @@ CustomRaffles:
     predicate:
     - '#Script#[IF]$arg1.type=NUMBER'
     - '#Script#[IF]%player%==Draww'
-    - '#Script#[IF]$arg1==6 [ElseAction] [Message] example1'
-    - '#Script#[IF]$math($arg1 + 1)==6.0 [ElseAction] [Message] example2;[Message] example3'
+    - '#Script#[IF]$arg1==5 [ElseAction] [Message] example1'
+    - '#Script#[IF]$math($arg1 + 5 - 1 + 1)==6.0 [ElseAction] [Message] example2;[Message] example3'
     actions:
     - '[Broadcast] %prefix% &7Hello, &a%player%'
     - '[Broadcast] %prefix% &7Your World, &a%player_world%'
     - '[Broadcast] %prefix% &7Example, &6$math($arg1 + 1)'
-    - '[GiveItem] DIAMOND_SWORD;1;;;&cexample1;&aexample2:&bexample3' #Material Names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+    - '#PlayerOptions#(addItem)DIAMOND_SWORD:1'
+    timing:
+      occasion: 'everyday'
+      time: '00:05, 00:15'

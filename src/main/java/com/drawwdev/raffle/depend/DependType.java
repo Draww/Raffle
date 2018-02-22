@@ -2,6 +2,8 @@ package com.drawwdev.raffle.depend;
 
 public enum DependType {
 
-    NORMAL, HIGH
+    NORMAL, HIGH;
+
+    private DependType() {}
 
 }

@@ -101,7 +101,7 @@ public class RaffleBuilder {
             if (!depends.isEmpty()) {
                 for (Depend depend : depends.values()) {
                     if (!depend.dependent()){
-                        throw new RaffleException("depend " + depend.getClass().getName() + " is not installed!");
+                        throw new RaffleException(depend.name() + " is not dependent!");
                     }
                 }
             }

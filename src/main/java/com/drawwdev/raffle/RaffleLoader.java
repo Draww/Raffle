@@ -1,5 +1,6 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.depend.EconomyDepend;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -22,10 +23,10 @@ public class RaffleLoader {
             raffleStorage.newBuilder("MONEY")
                     .setTime(5)
                     .setDatatype("Numeral")
-                    .addDepend(plugin.getEconomyDepend())
+                    .addDepend(plugin.getDepends().get("Economy"))
                     .setConsumer((player, raffleData, fromPlayer) -> {
                         Double MONEY = Double.parseDouble(String.valueOf(raffleData.get(0)));
-                        plugin.getEconomyDepend().get().depositPlayer(player, MONEY);
+                        ((EconomyDepend)plugin.getDepends().get("Economy")).get().depositPlayer(player, MONEY);
                         Bukkit.broadcastMessage(cc(plugin.getLanguage().tl("prefix") + plugin.getLanguage().tl("given", player.getName(), MONEY)));
                     })
                     .setPredicate((fromPlayer, raffleData) -> {
@@ -78,7 +79,7 @@ public class RaffleLoader {
                         return true;
                     }).build();
         } catch (RaffleException e) {
-            plugin.getLogger().log(Level.SEVERE, e.getMessage());
+            //plugin.getLogger().log(Level.SEVERE, e.getMessage());
         }
         loadCustomRaffle();
         return raffleStorage;

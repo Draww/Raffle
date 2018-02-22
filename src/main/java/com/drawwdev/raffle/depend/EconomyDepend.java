@@ -11,11 +11,9 @@ public class EconomyDepend implements Depend {
     private Main plugin;
     private Economy econ;
     private Boolean dependent = false;
-    private DependType dependType;
 
-    public EconomyDepend(Main plugin, DependType dependType) {
+    public EconomyDepend(Main plugin) {
         this.plugin = plugin;
-        this.dependType = dependType;
         setup();
     }
 
@@ -25,8 +23,13 @@ public class EconomyDepend implements Depend {
     }
 
     @Override
+    public String name() {
+        return "Economy";
+    }
+
+    @Override
     public DependType dependType() {
-        return dependType;
+        return DependType.NORMAL;
     }
 
     @Override

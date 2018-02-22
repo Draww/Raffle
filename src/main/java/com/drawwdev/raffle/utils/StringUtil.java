@@ -90,7 +90,7 @@ public class StringUtil {
             paramString = paramString.replace("%player_level%", String.valueOf(paramPlayer.getLevel()));
             paramString = paramString.replace("%player_exp%", String.valueOf(paramPlayer.getExp()));
         }
-        if (Main.getInstance().getPlaceholderDepend().dependent()){
+        if (Main.getInstance().getDepends().get("Placeholder").dependent()){
             paramString = PlaceholderAPI.setPlaceholders(paramPlayer, paramString);
         }
         return paramString;

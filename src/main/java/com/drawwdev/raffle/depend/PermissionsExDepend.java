@@ -10,11 +10,9 @@ public class PermissionsExDepend implements Depend {
 
     private Main plugin;
     private Boolean dependent = false;
-    private DependType dependType;
 
-    public PermissionsExDepend(Main plugin, DependType dependType) {
+    public PermissionsExDepend(Main plugin) {
         this.plugin = plugin;
-        this.dependType = dependType;
         setup();
     }
 
@@ -24,8 +22,13 @@ public class PermissionsExDepend implements Depend {
     }
 
     @Override
+    public String name() {
+        return "PermissionsEx";
+    }
+
+    @Override
     public DependType dependType() {
-        return dependType;
+        return DependType.NORMAL;
     }
 
     @Override

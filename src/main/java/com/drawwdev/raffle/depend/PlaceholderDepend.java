@@ -9,12 +9,10 @@ public class PlaceholderDepend implements Depend {
 
     private Main plugin;
     private Boolean dependent = false;
-    private DependType dependType;
     private EzHook ezHook;
 
-    public PlaceholderDepend(Main plugin, DependType dependType) {
+    public PlaceholderDepend(Main plugin) {
         this.plugin = plugin;
-        this.dependType = dependType;
         setup();
     }
 
@@ -24,8 +22,13 @@ public class PlaceholderDepend implements Depend {
     }
 
     @Override
+    public String name() {
+        return "Placeholder";
+    }
+
+    @Override
     public DependType dependType() {
-        return dependType;
+        return DependType.NORMAL;
     }
 
     @Override

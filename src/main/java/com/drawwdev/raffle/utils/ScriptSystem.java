@@ -3,6 +3,7 @@ package com.drawwdev.raffle.utils;
 import com.drawwdev.raffle.Main;
 import com.drawwdev.raffle.Raffle;
 import com.drawwdev.raffle.RaffleData;
+import com.drawwdev.raffle.depend.EconomyDepend;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.*;
@@ -453,12 +454,12 @@ public class ScriptSystem {
             }
         }
         if (action.contains("[HaveMoney]")) {
-            if (!Main.getInstance().getEconomyDepend().dependent()) {
+            if (!Main.getInstance().getDepends().get("Economy").dependent()) {
                 return false;
             }
             action = action.replace("[HaveMoney] ", "").replace("[HaveMoney]", "");
             String[] splitAction = action.split(Pattern.quote(" [ElseAction] "));
-            Double moneyPlayer = Main.getInstance().getEconomyDepend().get().getBalance(player);
+            Double moneyPlayer = ((EconomyDepend)Main.getInstance().getDepends().get("Economy")).get().getBalance(player);
             Double needMoney = Double.parseDouble(splitAction[0]);
             if (moneyPlayer < needMoney) {
                 if (splitAction[1] != null) {
@@ -775,20 +776,20 @@ public class ScriptSystem {
             final float soundFloat = 1.0f;
             player.playSound(player.getLocation(), Sound.valueOf(action.toUpperCase()), soundFloat, soundFloat);
         } else if (action.contains("[VaultGive]")) {
-            if (plugin.getEconomyDepend().dependent()) {
+            if (plugin.getDepends().get("Economy").dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[VaultGive] ", "").replace("[VaultGive]", ""));
                 action = replaceArgs(action, raffleData);
                 action = math(action);
                 final int amount = Integer.parseInt(action);
-                this.plugin.getEconomyDepend().get().depositPlayer((OfflinePlayer) player, (double) amount);
+                ((EconomyDepend)this.plugin.getDepends().get("Economy")).get().depositPlayer((OfflinePlayer) player, (double) amount);
             }
         } else if (action.contains("[VaultTake]")) {
-            if (plugin.getEconomyDepend().dependent()) {
+            if (plugin.getDepends().get("Economy").dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[VaultTake] ", "").replace("[VaultTake]", ""));
                 action = replaceArgs(action, raffleData);
                 action = math(action);
                 final int amount = Integer.parseInt(action);
-                this.plugin.getEconomyDepend().get().withdrawPlayer((OfflinePlayer) player, (double) amount);
+                ((EconomyDepend)this.plugin.getDepends().get("Economy")).get().withdrawPlayer((OfflinePlayer) player, (double) amount);
             }
         } else if (action.contains("[Teleport]")) {
             action = StringUtil.setPlaceholders(player, action.replace("[Teleport] ", "").replace("[Teleport]", ""));
@@ -871,7 +872,7 @@ public class ScriptSystem {
             out.writeUTF(action);
             player.sendPluginMessage((Plugin) this.plugin, "BungeeCord", out.toByteArray());
         } else if (action.contains("[addGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()) {
+            if (plugin.getDepends().get("PermissionsEx").dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[addGroup] ", "").replace("[addGroup]", ""));
                 action = replaceArgs(action, raffleData);
                 action = math(action);
@@ -889,7 +890,7 @@ public class ScriptSystem {
                 }
             }
         } else if (action.contains("[setGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()) {
+            if (plugin.getDepends().get("PermissionsEx").dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[setGroup] ", "").replace("[setGroup]", ""));
                 action = replaceArgs(action, raffleData);
                 action = math(action);
@@ -903,7 +904,7 @@ public class ScriptSystem {
                 }
             }
         } else if (action.contains("[removeGroup]")) {
-            if (plugin.getPermissionsExDepend().dependent()) {
+            if (plugin.getDepends().get("PermissionsEx").dependent()) {
                 action = StringUtil.setPlaceholders(player, action.replace("[removeGroup] ", "").replace("[removeGroup]", ""));
                 action = replaceArgs(action, raffleData);
                 action = math(action);
