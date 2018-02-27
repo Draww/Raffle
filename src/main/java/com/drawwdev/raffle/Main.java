@@ -1,5 +1,8 @@
 package com.drawwdev.raffle;
 
+import com.drawwdev.raffle.calendar.CListener;
+import com.drawwdev.raffle.calendar.CManager;
+import com.drawwdev.raffle.calendar.CTimer;
 import com.drawwdev.raffle.depend.*;
 import com.drawwdev.raffle.nms.*;
 import com.drawwdev.raffle.utils.Config;
@@ -15,6 +18,11 @@ public class Main extends JavaPlugin {
     private Language language;
     private Depends depends;
 
+    private CManager cManager;
+    private CTimer cTimer;
+
+    private RaffleCommand raffleCommand;
+
     @Override
     public void onEnable() {
         String packageName = this.getServer().getClass().getPackage().getName();
@@ -25,7 +33,6 @@ public class Main extends JavaPlugin {
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        setupMetrics();
         scriptSystem = new ScriptSystem(this);
         instance = this;
         saveDefaultConfig();
@@ -33,7 +40,11 @@ public class Main extends JavaPlugin {
         loadConfigs();
         language = new Language(this, getConfigs().get("language"));
         depends = new Depends(this);
-        new RaffleCommand(this);
+        raffleCommand = new RaffleCommand(this);
+        cManager = new CManager(this);
+        cTimer = new CTimer(this);
+        new CListener(this);
+        setupMetrics();
     }
 
     @Override
@@ -48,6 +59,7 @@ public class Main extends JavaPlugin {
     public void loadConfigs() {
         getConfigs().add("custom", new Config(this, "custom.yml", true));
         getConfigs().add("language", new Config(this, "language.yml", true));
+        getConfigs().add("calendar", new Config(this, "calendar.yml", true));
     }
 
     private CompatabilityManager setupCompatabilityNMS(String version) {
@@ -72,6 +84,20 @@ public class Main extends JavaPlugin {
         }
     }
 
+    public void reloadCalendars(){
+        if (cTimer != null) cTimer.cancel();
+        cManager.reload();
+        getNewTimer();
+    }
+
+    public void getNewTimer() {
+        cTimer = new CTimer(this);
+    }
+
+    public CManager getCManager() {
+        return cManager;
+    }
+
     public static Main getInstance() {
         return instance;
     }
@@ -94,5 +120,9 @@ public class Main extends JavaPlugin {
 
     public Depends getDepends() {
         return depends;
+    }
+
+    public RaffleCommand getRaffleCommand() {
+        return raffleCommand;
     }
 }

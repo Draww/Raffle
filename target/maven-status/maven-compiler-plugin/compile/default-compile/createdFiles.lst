@@ -1,3 +1,4 @@
+com\drawwdev\raffle\calendar\CManager$1.class
 com\drawwdev\raffle\depend\PermissionsExDepend.class
 com\drawwdev\raffle\utils\Config.class
 com\drawwdev\raffle\nms\Compatability_1_11_R1.class
@@ -10,10 +11,16 @@ com\drawwdev\raffle\RaffleBuilder.class
 com\drawwdev\raffle\nms\Compatability_1_8_R1.class
 com\drawwdev\raffle\CustomRaffle.class
 com\drawwdev\raffle\Metrics$DrilldownPie.class
+com\drawwdev\raffle\calendar\CManager.class
+com\drawwdev\raffle\calendar\CTimer$2.class
 com\drawwdev\raffle\RaffleStorage.class
+com\drawwdev\raffle\calendar\CManager$1$1.class
+com\drawwdev\raffle\calendar\CTimer$1$1.class
 com\drawwdev\raffle\Metrics$1.class
+com\drawwdev\raffle\calendar\CManager$3$1.class
 com\drawwdev\raffle\Raffle.class
 com\drawwdev\raffle\RaffleType.class
+com\drawwdev\raffle\calendar\CEvent.class
 com\drawwdev\raffle\RaffleException.class
 com\drawwdev\raffle\Metrics$1$1.class
 com\drawwdev\raffle\nms\Compatability_1_12_R1.class
@@ -28,7 +35,9 @@ com\drawwdev\raffle\nms\Compatability_1_8_R3.class
 com\drawwdev\raffle\depend\PlaceholderDepend$EzHook.class
 com\drawwdev\raffle\nms\Compatability_1_9_R2.class
 com\drawwdev\raffle\Metrics$SimpleBarChart.class
+com\drawwdev\raffle\calendar\CTimer.class
 com\drawwdev\raffle\Metrics$2.class
+com\drawwdev\raffle\calendar\CManager$3.class
 com\drawwdev\raffle\depend\EconomyDepend.class
 com\drawwdev\raffle\Metrics$SimplePie.class
 com\drawwdev\raffle\utils\arithmeticExpression.class
@@ -36,6 +45,7 @@ com\drawwdev\raffle\RaffleLoader.class
 com\drawwdev\raffle\depend\DependType.class
 com\drawwdev\raffle\RaffleCommand.class
 com\drawwdev\raffle\RaffleManager.class
+com\drawwdev\raffle\calendar\CManager$2$1.class
 com\drawwdev\raffle\RaffleData.class
 com\drawwdev\raffle\nms\Compatability_1_10_R1.class
 com\drawwdev\raffle\RaffleConsumer.class
@@ -46,6 +56,9 @@ com\drawwdev\raffle\Metrics$SingleLineChart.class
 com\drawwdev\raffle\Metrics$MultiLineChart.class
 com\drawwdev\raffle\depend\Depends.class
 com\drawwdev\raffle\utils\ListUtil.class
+com\drawwdev\raffle\calendar\CTimer$1.class
+com\drawwdev\raffle\calendar\Timing.class
 com\drawwdev\raffle\Metrics$CustomChart.class
 com\drawwdev\raffle\Main.class
+com\drawwdev\raffle\calendar\CManager$2.class
 com\drawwdev\raffle\nms\Compatability_1_9_R1.class

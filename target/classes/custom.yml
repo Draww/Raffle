@@ -15,6 +15,3 @@ CustomRaffles:
     - '[Broadcast] %prefix% &7Your World, &a%player_world%'
     - '[Broadcast] %prefix% &7Example, &6$math($arg1 + 1)'
     - '#PlayerOptions#(addItem)DIAMOND_SWORD:1'
-    timing:
-      occasion: 'everyday'
-      time: '00:05, 00:15'

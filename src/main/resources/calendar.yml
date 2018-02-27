@@ -1,0 +1,4 @@
+calendars:
+  example:
+    type: 'everyday'
+    time: '00:15, 00:30'

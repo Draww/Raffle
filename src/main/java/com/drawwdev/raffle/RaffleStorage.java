@@ -18,6 +18,14 @@ public class RaffleStorage {
         oraffle = new HashMap<>();
     }
 
+    public Raffle get(String raffleName){
+        return getOraffle().getOrDefault(raffleName, null);
+    }
+
+    public boolean has(String raffleName){
+        return getOraffle().containsKey(raffleName);
+    }
+
     public RaffleConsumer getConsumer(String raffleName){
         if (getOraffle().getOrDefault(raffleName, null) == null) return null;
         return getOraffle().getOrDefault(raffleName, null).getConsumer();
