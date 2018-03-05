@@ -1,8 +1,8 @@
 # Raffle
 
 # Contributors:
+- Korkugunu
 - RyenJuo
-- imturan
 
 
 # The first image:
